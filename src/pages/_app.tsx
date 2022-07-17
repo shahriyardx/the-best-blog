@@ -5,9 +5,14 @@ import { loggerLink } from '@trpc/client/links/loggerLink'
 import { httpBatchLink } from '@trpc/client/links/httpBatchLink'
 import superjson from 'superjson'
 import { AppRouter } from '../server/route/app.router'
+import { SessionProvider } from 'next-auth/react'
 
-const TheBest = ({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />
+const TheBest = ({ Component, pageProps: {session, ...pageProps} }: AppProps) => {
+  return (
+    <SessionProvider session={session}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  )
 }
 
 export default withTRPC<AppRouter>({
