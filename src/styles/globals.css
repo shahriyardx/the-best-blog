@@ -1,16 +1,17 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[floralwhite] dark:bg-zinc-900 text-zinc-700;
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.lowlight {
+  @apply !p-5;
 }
 
-* {
-  box-sizing: border-box;
+.hljs {
+  @apply !bg-transparent;
 }
