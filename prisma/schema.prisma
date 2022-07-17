@@ -11,22 +11,23 @@ datasource db {
 }
 
 model User {
-  id         String   @id @default(uuid())
-  email      String   @unique @db.VarChar(255)
-  username   String   @unique @db.VarChar(100)
-  github_id  String   @unique @db.VarChar(100)
-  is_admin   Boolean  @default(false)
-  is_active  Boolean  @default(true)
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  id         String    @id @default(uuid())
+  email      String    @unique @db.VarChar(255)
+  username   String    @unique @db.VarChar(100)
+  github_id  String    @unique @db.VarChar(100)
+  is_admin   Boolean   @default(false)
+  is_active  Boolean   @default(true)
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
   posts      Post[]
+  comments   Comment[]
 }
 
 model Category {
-  id   String @id @default(uuid())
-  name String @db.VarChar(20)
-  slug String @db.VarChar(30)
-  Post Post[]
+  id    String @id @default(uuid())
+  name  String @db.VarChar(20)
+  slug  String @db.VarChar(30)
+  posts Post[]
 }
 
 model Post {
@@ -39,6 +40,15 @@ model Post {
   visibility        Visibility @default(PUBLIC)
   Category          Category   @relation(fields: [category_id], references: [id])
   category_id       String
+  comments          Comment[]
+}
+
+model Comment {
+  id        String @id @default(uuid())
+  author    User   @relation(fields: [author_id], references: [id])
+  author_id String
+  post      Post   @relation(fields: [post_id], references: [id])
+  post_id   String
 }
 
 enum Visibility {
