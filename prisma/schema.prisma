@@ -21,6 +21,7 @@ model User {
   updated_at DateTime  @default(now())
   posts      Post[]
   comments   Comment[]
+  likes      Like[]
 }
 
 model Category {
@@ -41,6 +42,7 @@ model Post {
   Category          Category   @relation(fields: [category_id], references: [id])
   category_id       String
   comments          Comment[]
+  likes             Like[]
 }
 
 model Comment {
@@ -53,6 +55,15 @@ model Comment {
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
   approved   Boolean  @default(true)
+}
+
+model Like {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [user_id], references: [id])
+  user_id    String
+  post       Post     @relation(fields: [post_id], references: [id])
+  post_id    String
+  created_at DateTime @default(now())
 }
 
 enum Visibility {
