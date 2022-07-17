@@ -6,11 +6,28 @@ import { httpBatchLink } from '@trpc/client/links/httpBatchLink'
 import superjson from 'superjson'
 import { AppRouter } from '../server/route/app.router'
 import { SessionProvider } from 'next-auth/react'
+import SidebarContext, { SidebarProvider } from 'utils/SidebarContext'
+import { NextComponentType } from 'next'
+import RequireAuth from 'src/components/auth/requireAuth'
 
-const TheBest = ({ Component, pageProps: {session, ...pageProps} }: AppProps) => {
+type CustomAppProps = AppProps & {
+  Component: NextComponentType & { requireAuth: boolean }
+}
+
+const TheBest = ({ Component, pageProps: {session, ...pageProps} }: CustomAppProps) => {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <SidebarProvider>
+        {Component.requireAuth 
+          ? (
+            <RequireAuth>
+              <Component {...pageProps} />
+            </RequireAuth>
+          ) : (
+            <Component {...pageProps} />
+          )
+        }
+      </SidebarProvider>
     </SessionProvider>
   )
 }
