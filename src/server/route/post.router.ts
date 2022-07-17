@@ -11,11 +11,8 @@ export const postRouter = createRouter()
         where: {
           visibility: "PUBLIC",
         },
-        select: {
-          id: true,
-          title: true,
-          author: true,
-          likes: true
+        include: {
+          Category: true
         }
       }) 
       console.log(posts)
