@@ -44,11 +44,15 @@ model Post {
 }
 
 model Comment {
-  id        String @id @default(uuid())
-  author    User   @relation(fields: [author_id], references: [id])
-  author_id String
-  post      Post   @relation(fields: [post_id], references: [id])
-  post_id   String
+  id         String   @id @default(uuid())
+  author     User     @relation(fields: [author_id], references: [id])
+  author_id  String
+  post       Post     @relation(fields: [post_id], references: [id])
+  post_id    String
+  content    String
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+  approved   Boolean  @default(true)
 }
 
 enum Visibility {
