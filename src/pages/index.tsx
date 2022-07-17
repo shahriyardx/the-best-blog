@@ -40,6 +40,11 @@ const Home: NextPage = () => {
     }
   })
 
+  const { mutate: likeMutate } = trpc.useMutation(['posts.toggleLike'], {
+    onSuccess: () => {
+      console.log('Liked')
+    }
+  })
 
   const addPost = (data: PostInput) => {
     mutatePost(data)
@@ -54,6 +59,10 @@ const Home: NextPage = () => {
     console.log(data)
   }
 
+  const likePost = (post_id: string) => {
+    likeMutate({ post_id: post_id})
+  }
+
   return (
     <div>
       {postsLoading && <>Loading/...</>}
@@ -61,7 +70,7 @@ const Home: NextPage = () => {
         return (
           <>
             <h2 key={post.id}>{post.title} {post.author.username}</h2>
-
+            <button onClick={() => likePost(post.id)}>Like</button>
           </>
         )
       })}

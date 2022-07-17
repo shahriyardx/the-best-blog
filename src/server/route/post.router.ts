@@ -2,6 +2,7 @@ import { createRouter } from "../createRouter";
 import { PostSchema } from '../../schema/post.schema'
 import { TRPCError } from "@trpc/server";
 import { CommentSchema } from "../../schema/comment.schema";
+import { z } from "zod";
 
 export const postRouter = createRouter()
   .query('all', {
@@ -51,5 +52,42 @@ export const postRouter = createRouter()
       })
 
       return comment
+    }
+  })
+  .mutation('toggleLike', {
+    input: z.object({
+      post_id: z.string().uuid()
+    }),
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "You need to be logged in to like posts"
+        })
+      }
+
+      const liked = await ctx.prisma.like.findFirst({
+        where: {
+          post_id: input.post_id,
+          user_id: ctx.session.profile.id
+        }
+      })
+
+      if (liked) {
+        await ctx.prisma.like.delete({
+          where: {
+            id: liked.id
+          }
+        })
+      } else {
+        await ctx.prisma.like.create({
+          data: {
+            post_id: input.post_id,
+            user_id: ctx.session.profile.id
+          }
+        })
+      }
+
+      return { success: true }
     }
   })
