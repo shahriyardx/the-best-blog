@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { useSession } from 'next-auth/react'
 import { useForm } from 'react-hook-form'
 import { CategoryInput } from '../schema/category.schema'
 import { CommentInput } from '../schema/comment.schema'
@@ -6,6 +7,7 @@ import { PostInput } from '../schema/post.schema'
 import { trpc } from '../utils/trpc'
 
 const Home: NextPage = () => {
+  const { data: session } = useSession()
   const { register: regPost, handleSubmit: hsp } = useForm<PostInput>()
   const { register: regCat, handleSubmit: hsc } = useForm<CategoryInput>()
   const { register: regCom, handleSubmit: hcm } = useForm<CommentInput>()
@@ -31,8 +33,6 @@ const Home: NextPage = () => {
     post_id: '3bb5c8dc-ec52-4c64-859a-d0de8f1dedf1'
   }])
 
-  console.log(postComments)
-
   const { mutate: mutatePost, error: postError } = trpc.useMutation(['posts.create'], {
     onSuccess: () => {
       console.log("Category added")
@@ -43,6 +43,7 @@ const Home: NextPage = () => {
   const { mutate: likeMutate } = trpc.useMutation(['posts.toggleLike'], {
     onSuccess: () => {
       console.log('Liked')
+      refetchPosts()
     }
   })
 
@@ -70,7 +71,7 @@ const Home: NextPage = () => {
         return (
           <>
             <h2 key={post.id}>{post.title} {post.author.username}</h2>
-            <button onClick={() => likePost(post.id)}>Like</button>
+            <button onClick={() => likePost(post.id)}>{post.likes.find(like => like.user_id === session?.profile.id) ? "Unlike" : "Like"}</button>
           </>
         )
       })}

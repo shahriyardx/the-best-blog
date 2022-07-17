@@ -14,9 +14,11 @@ export const postRouter = createRouter()
         select: {
           id: true,
           title: true,
-          author: true
+          author: true,
+          likes: true
         }
-      })
+      }) 
+      console.log(posts)
 
       return posts
     }
