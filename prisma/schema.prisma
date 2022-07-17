@@ -19,4 +19,30 @@ model User {
   is_active  Boolean  @default(true)
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+  posts      Post[]
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String @db.VarChar(20)
+  slug String @db.VarChar(30)
+  Post Post[]
+}
+
+model Post {
+  id                String     @id @default(uuid())
+  title             String     @db.VarChar(128)
+  short_description String     @db.VarChar(256)
+  author            User       @relation(fields: [author_id], references: [id])
+  author_id         String
+  content           String     @db.Text
+  visibility        Visibility @default(PUBLIC)
+  Category          Category   @relation(fields: [category_id], references: [id])
+  category_id       String
+}
+
+enum Visibility {
+  PUBLIC
+  PRIVATE
+  UNLISTED
 }
