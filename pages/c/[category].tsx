@@ -26,7 +26,7 @@ const CategoryPosts: NextPage = () => {
     <Page>
       <SEO title={`Category : ${category?.id}`} />
       <div className='flex justify-between items-center mb-10'>
-        <h1 className='text-4xl font-bold dark:text-zinc-200 flex gap-2'>
+        <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold dark:text-zinc-200 flex gap-2'>
           <span>
             Category {"=>"}
           </span>
