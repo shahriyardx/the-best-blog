@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import ThemeToggle from '@components/ThemeToggle/ThemeToggle'
 import { BiMenu } from 'react-icons/bi'
 import Link from 'next/link'
-import SidebarContext from 'utils/SidebarContext'
+import SidebarContext from 'src/utils/SidebarContext'
 
 const Header = () => {
   const { toggle } = useContext(SidebarContext)
