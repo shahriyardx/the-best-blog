@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { useSession } from 'next-auth/react'
 import { AiFillGithub} from 'react-icons/ai'
+import { trpc } from 'src/utils/trpc'
+import toast from 'react-hot-toast'
 
 type Props = {
   comment: {
+    id: string;
     author: {
         username: string;
         id: string
@@ -17,6 +20,14 @@ type Props = {
 
 const PostComment = ({ comment, refetch }: Props) => {
   const {data: session} = useSession()
+  const { mutate: deleteComment } = trpc.useMutation(['comments.deletebyId'], {
+    onSuccess: () => {
+      refetch()
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    }
+  })
 
   return (
     <div className='bg-black/10 dark:bg-zinc-800 p-4 rounded-md max-w-[65ch]'>
@@ -33,10 +44,9 @@ const PostComment = ({ comment, refetch }: Props) => {
       </a>
 
       <p className='dark:text-zinc-300 text-lg'>{comment.content}</p>
-      
       {session && (session.profile.id === comment.author.id || session.profile.is_admin ) && (
         <div className='flex items-center gap-3'>
-          <button onClick={() => {}} 
+          <button onClick={() => deleteComment({ comment_id: comment.id })}
           className='text-red-500 text-xs'>Delete</button>
         </div>
       )}

@@ -6,9 +6,10 @@ import { httpBatchLink } from '@trpc/client/links/httpBatchLink'
 import superjson from 'superjson'
 import { AppRouter } from '../server/route/app.router'
 import { SessionProvider } from 'next-auth/react'
-import SidebarContext, { SidebarProvider } from 'utils/SidebarContext'
+import { SidebarProvider } from 'utils/SidebarContext'
 import { NextComponentType } from 'next'
 import RequireAuth from 'src/components/auth/requireAuth'
+import { Toaster } from 'react-hot-toast'
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & { requireAuth: boolean }
@@ -27,6 +28,7 @@ const TheBest = ({ Component, pageProps: {session, ...pageProps} }: CustomAppPro
             <Component {...pageProps} />
           )
         }
+        <Toaster />
       </SidebarProvider>
     </SessionProvider>
   )
