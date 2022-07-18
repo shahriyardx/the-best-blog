@@ -28,7 +28,7 @@ const Page = ({ children }: Props) => {
           <div>
             <h3 className='uppercase font-semibold text-lg'>👜 Categories</h3>
             <div className='flex flex-col gap-2 mt-3'>
-              {categories?.map(category => (
+              {categories?.slice(0, allcat ? undefined : 5).map(category => (
                   <SidebarLink key={category.id} href={`/c/${category.slug}`}>{category.name}</SidebarLink>
                 )
               )}
