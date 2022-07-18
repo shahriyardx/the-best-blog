@@ -1,7 +1,7 @@
 import SidebarLink from 'components/single/SidebarLink/SidebarLink'
-import Header from 'components/sections/Header/Header'
 import Sidebar from 'components/sections/Sidebar/Sidebar'
 import React from 'react'
+import DashHeader from 'components/sections/Header/DashHeader'
 
 type Props = {
   children: React.ReactNode | React.ReactNode[]
@@ -10,7 +10,7 @@ type Props = {
 const AdminPage = ({ children }: Props) => {
   return (
     <>
-      <Header />
+      <DashHeader />
       <div className='container mx-auto grid grid-cols-1 sm:grid-cols-sidebarLayout gap-5 px-5 sm:px-7 md:px-10 mt-3 sm:mt-5 md:mt-10'>
         <Sidebar>
           <div className='flex flex-col gap-2'>
