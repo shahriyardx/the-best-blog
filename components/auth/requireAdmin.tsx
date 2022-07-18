@@ -25,7 +25,7 @@ const RequireAdmin = ({ children }: Props) => {
     !session?.profile.is_admin ||
     !session?.profile.is_active
   ) {
-    router.push("/");
+    router.push("/lol");
   }
 
   return children as JSX.Element;
