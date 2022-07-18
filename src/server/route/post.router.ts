@@ -1,5 +1,5 @@
 import { createRouter } from "../createRouter";
-import { PostSchema } from '../../schema/post.schema'
+import { PostSchema, PostUpdateSchema } from '../../schema/post.schema'
 import { TRPCError } from "@trpc/server";
 import { CommentSchema } from "../../schema/comment.schema";
 import { z } from "zod";
@@ -186,6 +186,48 @@ export const postRouter = createRouter()
         where: {
           id: input.post_id
         }
+      })
+
+      return { success: true }
+    }
+  })
+  .mutation('updateById', {
+    input: PostUpdateSchema,
+    async resolve({ ctx, input}) {
+      if (!ctx.session) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "You are not logged in"
+        })
+      }
+
+      const post = await ctx.prisma.post.findUnique({
+        where: {
+          id: input.post_id
+        }
+      })
+
+      if (!post) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Post not found"
+        })
+      }
+
+      if (post.author_id !== ctx.session.profile.id) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You are not allowed to delete this post"
+        })
+      }
+      
+      const {post_id, ...postData} = input
+
+      await ctx.prisma.post.update({
+        where: {
+          id: input.post_id
+        },
+        data: postData
       })
 
       return { success: true }
