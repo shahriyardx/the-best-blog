@@ -1,29 +1,17 @@
-import { IPost } from '@database/schemas/Post'
 import { Dialog, Transition } from '@headlessui/react'
+import { Post } from '@prisma/client'
 import { API_BASE } from 'config'
 import Link from 'next/link'
 import React, { Fragment, useState } from 'react'
 import toast from 'react-hot-toast'
 
+
 type Props = {
-  post: IPost
-  refetch: () => void
+  post: Pick<Post, "id" | "title" | "short_description">
 }
 
-const ProfilePost = ({ post, refetch }: Props ) => {
+const ProfilePost = ({ post }: Props ) => {
   const [open, setOpen] = useState<boolean>(false)
-
-  const deletePost = async () => {
-    const message = await fetch(`${API_BASE}/post/${post._id}`, {
-      method: "DELETE",
-    }).then(data => data.json())
-    if (message.success) {
-      refetch()
-      toast.success("Post deleted")
-    } else {
-      toast.error(message.error)
-    }
-  }
   
   return (
     <div className='p-5 rounded-md dark:bg-zinc-800 bg-[bisque]'>
@@ -33,10 +21,10 @@ const ProfilePost = ({ post, refetch }: Props ) => {
         {post.title}
       </h2>
       <p className='dark:text-zinc-400 mt-2 mb-4'>
-        {post.description}
+        {post.short_description}
       </p>
       <div className='flex gap-2 text-lg'>
-        <Link href={`/profile/posts/edit/${post._id}`} passHref>
+        <Link href={`/profile/posts/edit/${post.id}`} passHref>
           <a className='text-black dark:text-zinc-300'>Edit</a>
         </Link>
 
@@ -83,7 +71,7 @@ const ProfilePost = ({ post, refetch }: Props ) => {
 
                   <div className="mt-4 flex gap-3">
                     <button
-                      onClick={deletePost}
+                      onClick={() => {}}
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-black hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     >
