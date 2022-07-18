@@ -64,6 +64,9 @@ const Page = ({ children }: Props) => {
                 ) : (
                   <>
                     <SidebarLink href='/u/posts'>My Posts</SidebarLink>
+                    {session.profile.is_admin && session.profile.is_active && (
+                      <SidebarLink href='/admin/'>Admin</SidebarLink>
+                    )}
                     <button
                       onClick={() => signOut()}
                       className='
