@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { trpc } from '@utils/trpc'
 import Link from 'next/link'
 import { BiChevronLeft } from 'react-icons/bi'
+import BlogLoading from 'components/single/BlogLoading/BlogLoading'
 
 
 const CategoryPosts: NextPage = () => {
@@ -44,6 +45,7 @@ const CategoryPosts: NextPage = () => {
           </a>
         </Link>
       </div>
+      {isLoading && <BlogLoading / >}
       <Blogs category={category}/>
     </Page>
   )

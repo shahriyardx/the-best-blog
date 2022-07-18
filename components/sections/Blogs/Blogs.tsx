@@ -29,6 +29,10 @@ const Blogs = ({ category }: Props ) => {
   const postsStart = (page - 1) * POSTS_PER_PAGE
   const postsToShow = filteredPosts.slice(postsStart, postsStart + POSTS_PER_PAGE)
   
+  if (!postsToShow?.length) {
+    return <p className='dark:text-zinc-400'>No posts found</p>
+  }
+
   return (
     <section className='container mx-auto'>
       <div className='flex flex-col gap-8'>
