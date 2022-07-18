@@ -40,7 +40,7 @@ const ProfilePost = ({ post, refetch }: Props ) => {
         {post.short_description}
       </p>
       <div className='flex gap-2 text-lg'>
-        <Link href={`/profile/posts/edit/${post.id}`} passHref>
+        <Link href={`/u/posts/edit/${post.id}`} passHref>
           <a className='text-black dark:text-zinc-300'>Edit</a>
         </Link>
 

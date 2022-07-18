@@ -19,7 +19,7 @@ const BlogCard = ({ post }: Props) => {
           {post.title}
         </a>
       </Link>
-      <Link href={`/c/${post.category_id}`} passHref>
+      <Link href={`/c/${post.Category.slug}`} passHref>
         <a 
           className='
             uppercase inline-block
