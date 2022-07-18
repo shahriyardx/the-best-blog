@@ -1,6 +1,6 @@
 import { createRouter } from "../createRouter";
 import { TRPCError } from "@trpc/server";
-import { CategorySchema } from "../../schema/category.schema";
+import { CategorySchema } from "@schema/category.schema";
 
 export const categoryRouter = createRouter()
   .mutation('create', {

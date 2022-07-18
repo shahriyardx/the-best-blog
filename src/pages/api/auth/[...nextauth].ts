@@ -1,7 +1,7 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
-import { prisma } from "../../../server/db/client";
+import { prisma } from "src/server/db/client";
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session

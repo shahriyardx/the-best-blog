@@ -3,7 +3,7 @@ import { Post } from '@prisma/client'
 import Link from 'next/link'
 import React, { Fragment, useState } from 'react'
 import toast from 'react-hot-toast'
-import { trpc } from 'src/utils/trpc'
+import { trpc } from '@utils/trpc'
 
 
 type Props = {

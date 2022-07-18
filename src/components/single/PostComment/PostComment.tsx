@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from 'react'
 import { useSession } from 'next-auth/react'
 import { AiFillGithub} from 'react-icons/ai'
-import { trpc } from 'src/utils/trpc'
+import { trpc } from '@utils/trpc'
 import toast from 'react-hot-toast'
 
 type Props = {

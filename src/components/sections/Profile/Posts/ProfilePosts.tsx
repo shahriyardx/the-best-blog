@@ -1,5 +1,5 @@
 import React from 'react'
-import { trpc } from 'src/utils/trpc'
+import { trpc } from '@utils/trpc'
 import ProfilePost from '@components/ProfilePost/ProfilePost'
 
 const ProfilePosts = () => {

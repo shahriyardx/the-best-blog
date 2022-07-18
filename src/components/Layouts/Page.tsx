@@ -3,7 +3,7 @@ import Header from '@sections/Header/Header'
 import Sidebar from '@sections/Sidebar/Sidebar'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import React, { useState } from 'react'
-import { trpc } from 'src/utils/trpc'
+import { trpc } from '@utils/trpc'
 
 type Props = {
   children: React.ReactNode | React.ReactNode[]

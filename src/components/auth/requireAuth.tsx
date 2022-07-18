@@ -2,7 +2,7 @@ import ProfilePage from "@layouts/ProfilePage";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React from "react";
-import { Children } from "src/types/common";
+import { Children } from "types/common";
 
 type Props = {
   children: Children 

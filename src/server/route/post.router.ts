@@ -1,7 +1,7 @@
 import { createRouter } from "../createRouter";
-import { PostSchema, PostUpdateSchema } from '../../schema/post.schema'
+import { PostSchema, PostUpdateSchema } from '@schema/post.schema'
 import { TRPCError } from "@trpc/server";
-import { CommentSchema } from "../../schema/comment.schema";
+import { CommentSchema } from "@schema/comment.schema";
 import { z } from "zod";
 
 export const postRouter = createRouter()

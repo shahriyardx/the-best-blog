@@ -3,9 +3,9 @@ import { NextPage } from 'next'
 import ProfilePage from '@layouts/ProfilePage'
 import TextEditor from '@components/TextEditor/TextEditor';
 import { useForm } from 'react-hook-form'
-import { PostInput } from '../../../schema/post.schema'
+import { PostInput } from '@schema/post.schema'
 import SEO from '@components/SEO';
-import { trpc } from 'src/utils/trpc';
+import { trpc } from '@utils/trpc';
 import toast from 'react-hot-toast';
 
 const CreatePost: NextPage & { requireAuth: boolean } = () => {

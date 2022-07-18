@@ -19,6 +19,8 @@
       "@components/*": ["./src/components/single/*"],
       "@layouts/*": ["./src/components/Layouts/*"],
       "@sections/*": ["./src/components/sections/*"],
+      "@schema/*": ["./src/schema/*"],
+      "@utils/*": ["./src/utils/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { BiX } from 'react-icons/bi'
-import { Children } from "src/types/common";
-import SidebarContext from 'src/utils/SidebarContext'
+import { Children } from "types/common";
+import SidebarContext from '@utils/SidebarContext'
 
 type Props = {
   children: Children

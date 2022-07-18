@@ -3,7 +3,7 @@ import Blogs from '@sections/Blogs/Blogs'
 import Page from '@layouts/Page'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { trpc } from 'src/utils/trpc'
+import { trpc } from '@utils/trpc'
 import Link from 'next/link'
 import { BiChevronLeft } from 'react-icons/bi'
 

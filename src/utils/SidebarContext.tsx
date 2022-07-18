@@ -1,5 +1,5 @@
 import { createContext, useState } from 'react'
-import { Children } from "src/types/common";
+import { Children } from "types/common";
 
 const SidebarContext = createContext({ open: false, toggle: () => {} })
 

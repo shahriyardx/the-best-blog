@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router';
 import SEO from '@components/SEO';
 import { PostInput } from 'src/schema/post.schema';
-import { trpc } from 'src/utils/trpc';
+import { trpc } from '@utils/trpc';
 import toast from 'react-hot-toast';
 
 const EditPost = () => {

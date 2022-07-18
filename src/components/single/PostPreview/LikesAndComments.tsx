@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import toast from 'react-hot-toast'
 import { useSession } from 'next-auth/react'
-import { Post, Comment, Like, Category, User } from '@prisma/client'
-import { API_BASE } from 'config'
+import { Post, Comment, Like, User } from '@prisma/client'
 import { AiOutlineHeart, AiFillHeart, AiOutlineComment, AiOutlineLoading3Quarters } from 'react-icons/ai'
-import { trpc } from 'src/utils/trpc'
+import { trpc } from '@utils/trpc'
 
 interface Props {
   post_id: string,

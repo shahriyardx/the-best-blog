@@ -1,8 +1,8 @@
 import { signIn, useSession } from 'next-auth/react'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { trpc } from 'src/utils/trpc'
-import { CommentInput } from '../../../schema/comment.schema'
+import { trpc } from '@utils/trpc'
+import { CommentInput } from '@schema/comment.schema'
 type Props = {
   post_id: string
   refetch: () => void

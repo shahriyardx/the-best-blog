@@ -9,10 +9,10 @@ import { Post, Comment, Like, Category, User } from '@prisma/client'
 import { createSSGHelpers } from '@trpc/react/ssg';
 import { appRouter } from 'src/server/route/app.router';
 import superjson from 'superjson'
-import { prisma } from "../../server/db/client";
-import { createContext }  from '../../server/createContext'
+import { prisma } from "src/server/db/client";
+import { createContext }  from 'src/server/createContext'
 import LikesAndComments from '@components/PostPreview/LikesAndComments'
-import { trpc } from 'src/utils/trpc';
+import { trpc } from '@utils/trpc';
 import CommentForm from '@components/PostPreview/CommentForm';
 import Comments from '@components/PostPreview/Comments';
 
