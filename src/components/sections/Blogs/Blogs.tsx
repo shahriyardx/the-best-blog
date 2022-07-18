@@ -3,7 +3,7 @@ import BlogCard from '@components/BlogCard/BlogCard'
 import Paginator from '@sections/Paginator/Paginator'
 import { useRouter } from 'next/router'
 import { POSTS_PER_PAGE } from 'config'
-import { trpc } from 'src/utils/trpc'
+import { trpc } from '@utils/trpc'
 import { Category } from '@prisma/client'
 import BlogLoading from '@components/BlogLoading/BlogLoading'
 
