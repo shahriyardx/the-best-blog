@@ -14,8 +14,23 @@ export const postRouter = createRouter()
         include: {
           Category: true
         }
-      }) 
-      console.log(posts)
+      })
+      return posts
+    }
+  })
+  .query('byCategoryId', {
+    input: z.object({
+      category_id: z.string().uuid()
+    }),
+    async resolve({ ctx, input }) {
+      const posts = await ctx.prisma.post.findMany({
+        where: {
+          category_id: input.category_id
+        },
+        include: {
+          Category: true
+        }
+      })
 
       return posts
     }
