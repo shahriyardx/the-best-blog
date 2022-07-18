@@ -3,6 +3,7 @@ import Header from '@sections/Header/Header'
 import Sidebar from '@sections/Sidebar/Sidebar'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import React, { useState } from 'react'
+import { trpc } from 'src/utils/trpc'
 
 type Props = {
   children: React.ReactNode | React.ReactNode[]
@@ -11,6 +12,7 @@ type Props = {
 const Page = ({ children }: Props) => {
   const { data: session, status } = useSession()
   const [allcat, setAllCat] = useState<boolean>(false)
+  const { data: categories } = trpc.useQuery(['category.all'])
 
   return (
     <>
@@ -26,13 +28,10 @@ const Page = ({ children }: Props) => {
           <div>
             <h3 className='uppercase font-semibold text-lg'>👜 Categories</h3>
             <div className='flex flex-col gap-2 mt-3'>
-              {/* {Object
-                .keys(CATEGORIES)
-                .slice(0, allcat ? Object.keys(CATEGORIES).length : 5)
-                .map(name => (
-                  <SidebarLink key={name} href={`/c/${name}`}>{CATEGORIES[name]}</SidebarLink>
+              {categories?.map(category => (
+                  <SidebarLink key={category.id} href={`/c/${category.slug}`}>{category.name}</SidebarLink>
                 )
-              )} */}
+              )}
 
               <div>
                 <button

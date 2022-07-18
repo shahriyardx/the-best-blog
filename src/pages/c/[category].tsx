@@ -16,7 +16,8 @@ const CategoryPosts: NextPage = () => {
     return <Page>Loading...</Page>
   }
   
-  const category = categories?.find(cat => cat.id === router.query.category)
+  const category = categories?.find(cat => cat.slug === router.query.category)
+  
   if (!category) {
     router.push('/')
   }
