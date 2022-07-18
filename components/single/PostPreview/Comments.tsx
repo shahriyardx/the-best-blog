@@ -1,4 +1,4 @@
-import PostComment from '@components/PostComment/PostComment'
+import PostComment from 'components/single/PostComment/PostComment'
 import React from 'react'
 
 type Props = {

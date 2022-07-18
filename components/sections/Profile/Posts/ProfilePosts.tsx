@@ -1,6 +1,6 @@
 import React from 'react'
 import { trpc } from '@utils/trpc'
-import ProfilePost from '@components/ProfilePost/ProfilePost'
+import ProfilePost from 'components/single/ProfilePost/ProfilePost'
 
 const ProfilePosts = () => {
   const { data: posts, refetch } = trpc.useQuery(['user.posts'])

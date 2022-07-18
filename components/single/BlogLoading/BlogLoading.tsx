@@ -1,4 +1,4 @@
-import BlogCardSkeleaton from "@components/BlogCard/BlogCardSkeleaton"
+import BlogCardSkeleaton from "components/single/BlogCard/BlogCardSkeleaton"
 
 const BlogLoading = () => {
   return (

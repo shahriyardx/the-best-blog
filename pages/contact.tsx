@@ -1,7 +1,7 @@
 import React from 'react'
 import { NextPage } from 'next'
-import Page from '@layouts/Page'
-import SEO from '@components/SEO'
+import Page from 'components/Layouts/Page'
+import SEO from 'components/single/SEO'
 
 const About: NextPage = () => {
   return (

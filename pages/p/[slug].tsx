@@ -1,20 +1,20 @@
 import type { GetStaticPropsContext, NextPage } from 'next'
-import Page from '@layouts/Page'
+import Page from 'components/Layouts/Page'
 import { GetStaticPaths } from 'next'
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import PostPreview from '@components/PostPreview/PostPreview'
-import SEO from '@components/SEO'
+import PostPreview from 'components/single/PostPreview/PostPreview'
+import SEO from 'components/single/SEO'
 import { Post, Comment, Like, Category, User } from '@prisma/client'
 import { createSSGHelpers } from '@trpc/react/ssg';
 import { appRouter } from 'src/server/route/app.router';
 import superjson from 'superjson'
 import { prisma } from "src/server/db/client";
 import { createContext }  from 'src/server/createContext'
-import LikesAndComments from '@components/PostPreview/LikesAndComments'
+import LikesAndComments from 'components/single/PostPreview/LikesAndComments'
 import { trpc } from '@utils/trpc';
-import CommentForm from '@components/PostPreview/CommentForm';
-import Comments from '@components/PostPreview/Comments';
+import CommentForm from 'components/single/PostPreview/CommentForm';
+import Comments from 'components/single/PostPreview/Comments';
 
 interface Props {
   post: Post & { Category: Category, likes: Like[], comments: Comment[], author: User}

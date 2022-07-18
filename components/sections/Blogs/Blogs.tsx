@@ -1,11 +1,11 @@
 import React from 'react'
-import BlogCard from '@components/BlogCard/BlogCard'
-import Paginator from '@sections/Paginator/Paginator'
+import BlogCard from 'components/single/BlogCard/BlogCard'
+import Paginator from 'components/sections/Paginator/Paginator'
 import { useRouter } from 'next/router'
 import { POSTS_PER_PAGE } from 'config'
 import { trpc } from '@utils/trpc'
 import { Category } from '@prisma/client'
-import BlogLoading from '@components/BlogLoading/BlogLoading'
+import BlogLoading from 'components/single/BlogLoading/BlogLoading'
 
 type Props = {
   category?: Category

@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useState } from 'react'
 import { NextPage } from 'next'
-import ProfilePage from '@layouts/ProfilePage'
-import TextEditor from '@components/TextEditor/TextEditor';
+import ProfilePage from 'components/Layouts/ProfilePage'
+import TextEditor from 'components/single/TextEditor/TextEditor';
 import { useForm } from 'react-hook-form'
 import { PostInput } from '@schema/post.schema'
-import SEO from '@components/SEO';
+import SEO from 'components/single/SEO';
 import { trpc } from '@utils/trpc';
 import toast from 'react-hot-toast';
 

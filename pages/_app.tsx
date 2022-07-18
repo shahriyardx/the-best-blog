@@ -8,7 +8,7 @@ import { AppRouter } from 'src/server/route/app.router'
 import { SessionProvider } from 'next-auth/react'
 import { SidebarProvider } from '@utils/SidebarContext'
 import { NextComponentType } from 'next'
-import RequireAuth from 'src/components/auth/requireAuth'
+import RequireAuth from 'components/auth/requireAuth'
 import { Toaster } from 'react-hot-toast'
 
 type CustomAppProps = AppProps & {
