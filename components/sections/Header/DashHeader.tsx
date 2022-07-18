@@ -18,7 +18,21 @@ const DashHeader = () => {
           <a className='text-2xl font-semibold text-zinc-800 dark:text-zinc-300'>Dashboard</a>
         </Link>
 
+        <div className='ml-auto flex gap-5 items-center'>
+          <Link href="/">
+            <a className='dark:text-zinc-300'>
+              Home
+            </a>
+          </Link>
+
+          <Link href="/u">
+            <a className='dark:text-zinc-300'>
+              Profile
+            </a>
+          </Link>
         <ThemeToggle />
+
+        </div>
       </div>
     </header>
   )
