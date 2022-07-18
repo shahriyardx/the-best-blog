@@ -52,7 +52,7 @@ export const userRouter = createRouter()
       if (post.author_id !== (ctx.session?.profile.id as string)) {
         throw new TRPCError({
           code: "FORBIDDEN",
-          message: "You dont have permission to access this",
+          message: "You dont have permission to access this post",
         });
       }
 

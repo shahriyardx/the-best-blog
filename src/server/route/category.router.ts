@@ -16,17 +16,15 @@ export const categoryRouter = createRouter()
       console.log("Session");
       throw new TRPCError({
         code: "UNAUTHORIZED",
-        message: "You need to be logged in to create a category",
+        message: "You are not logged in",
       });
     }
 
-    console.log(ctx.session.profile);
-
-    if (!ctx.session.profile.is_admin) {
+    if (!ctx.session.profile.is_admin || !ctx.session.profile.is_active) {
       console.log("Admin");
       throw new TRPCError({
         code: "FORBIDDEN",
-        message: "You are not allowed to delete category",
+        message: "You are not allowed to do this action",
       });
     }
 
