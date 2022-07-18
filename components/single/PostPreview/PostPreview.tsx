@@ -51,7 +51,15 @@ const PostPreview = ({ post }: Props) => {
         </div>
       </div>
 
-      <div className="prose dark:prose-invert prose-blue dark:prose-headings:text-zinc-300 mt-10 md:prose-lg max-w-full prose-img:w-full">
+      <div
+        className="
+          prose dark:prose-invert prose-blue 
+          dark:prose-headings:text-zinc-400 mt-10 
+          md:prose-lg max-w-full prose-img:w-full
+          dark:prose-p:text-zinc-500 prose-code:text-blue-500 dark:prose-code:text-blue-300
+          dark:prose-blockquote:bg-zinc-800 prose-blockquote:bg-zinc-200 prose-blockquote:border-l-zinc-500
+        "
+      >
         <Markdown renderer={renderer}>{post.content}</Markdown>
       </div>
     </div>
