@@ -18,6 +18,51 @@ export const postRouter = createRouter()
       return posts
     }
   })
+  .query('byId', {
+    input: z.object({
+      post_id: z.string().uuid()
+    }),
+    async resolve({ ctx, input }) {
+      const posts = await ctx.prisma.post.findFirst({
+        where: {
+          visibility: {
+            in: ['PUBLIC', 'UNLISTED'],
+          },
+          id: input.post_id
+        },
+        include: {
+          Category: true,
+          likes: {
+            select: {
+              user_id: true,
+              post_id: true
+            }
+          },
+          comments: {
+            select: {
+              id: true,
+              author: {
+                select: {
+                  username: true,
+                  id: true
+                }
+              },
+              author_id: true,
+              post_id:  true,
+              content: true
+            }
+          },
+          author: {
+            select: {
+              username: true
+            }
+          }
+        }
+      })
+
+      return posts
+    }
+  })
   .query('byCategoryId', {
     input: z.object({
       category_id: z.string().uuid()

@@ -4,7 +4,7 @@ import { authOptions as  nextAuthOptions } from '../pages/api/auth/[...nextauth]
 import { prisma } from "./db/client";
 import { inferAsyncReturnType } from '@trpc/server'
 
-export const createContext = async ({ req, res }: { req: NextApiRequest, res: NextApiResponse}) => {
+export const createContext = async ({ req, res }: { req?: NextApiRequest, res?: NextApiResponse}) => {
     const session = req && res && (await getServerSession(req, res, nextAuthOptions));
 
     return {

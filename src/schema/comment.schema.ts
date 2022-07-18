@@ -1,4 +1,4 @@
-import z, { string } from 'zod'
+import z from 'zod'
 
 export const CommentSchema = z.object({
     post_id: z.string().uuid(),
