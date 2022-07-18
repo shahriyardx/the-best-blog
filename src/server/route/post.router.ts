@@ -13,6 +13,9 @@ export const postRouter = createRouter()
         },
         include: {
           Category: true
+        },
+        orderBy: {
+          created_at: "desc"
         }
       })
       return posts

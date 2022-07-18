@@ -20,6 +20,9 @@ export const userRouter = createRouter()
           id: true,
           title: true,
           short_description: true
+        },
+        orderBy: {
+          created_at: "desc"
         }
       })
       return posts
