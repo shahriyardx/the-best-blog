@@ -88,17 +88,21 @@ export const postRouter = createRouter()
       return posts
     }
   })
+  .middleware(async ({ ctx, next }) => {
+    if (!ctx.session) {
+      console.log("Session")
+      throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "You are not logged in"
+      })
+    }
+    return next()
+  })
   .mutation('create', {
     input: PostSchema,
     async resolve({ ctx, input }) {
-      if (!ctx.session) {
-        throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You need to be logged in to create a post"
-        })
-      }
       const post = await ctx.prisma.post.create({
-        data: {...input, author_id: ctx.session.profile.id}
+        data: {...input, author_id: ctx.session?.profile.id as string}
       })
 
       return post
@@ -107,15 +111,8 @@ export const postRouter = createRouter()
   .mutation('addComment', {
     input: CommentSchema,
     async resolve({ ctx, input }) {
-      if (!ctx.session) {
-        throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You need to be logged in to add comments"
-        })
-      }
-
       const comment = await ctx.prisma.comment.create({
-        data: {...input, author_id: ctx.session.profile.id}
+        data: {...input, author_id: ctx.session?.profile.id as string}
       })
 
       return comment
@@ -126,17 +123,10 @@ export const postRouter = createRouter()
       post_id: z.string().uuid()
     }),
     async resolve({ ctx, input }) {
-      if (!ctx.session) {
-        throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You need to be logged in to like posts"
-        })
-      }
-
       const liked = await ctx.prisma.like.findFirst({
         where: {
           post_id: input.post_id,
-          user_id: ctx.session.profile.id
+          user_id: ctx.session?.profile.id as string
         }
       })
 
@@ -150,7 +140,7 @@ export const postRouter = createRouter()
         await ctx.prisma.like.create({
           data: {
             post_id: input.post_id,
-            user_id: ctx.session.profile.id
+            user_id: ctx.session?.profile.id as string
           }
         })
       }
@@ -163,13 +153,6 @@ export const postRouter = createRouter()
       post_id: z.string().uuid()
     }),
     async resolve({ ctx, input }) {
-      if (!ctx.session) {
-        throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You are not logged in"
-        })
-      }
-
       const post = await ctx.prisma.post.findUnique({
         where: {
           id: input.post_id
@@ -183,7 +166,7 @@ export const postRouter = createRouter()
         })
       }
 
-      if (post.author_id !== ctx.session.profile.id) {
+      if (post.author_id !== ctx.session?.profile.id as string) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You are not allowed to delete this post"
@@ -202,13 +185,6 @@ export const postRouter = createRouter()
   .mutation('updateById', {
     input: PostUpdateSchema,
     async resolve({ ctx, input}) {
-      if (!ctx.session) {
-        throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You are not logged in"
-        })
-      }
-
       const post = await ctx.prisma.post.findUnique({
         where: {
           id: input.post_id
@@ -222,7 +198,7 @@ export const postRouter = createRouter()
         })
       }
 
-      if (post.author_id !== ctx.session.profile.id) {
+      if (post.author_id !== ctx.session?.profile.id as string) {
         throw new TRPCError({
           code: "FORBIDDEN",
           message: "You are not allowed to delete this post"
