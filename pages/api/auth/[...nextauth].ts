@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
         if (!db_user) {
           db_user = await prisma.user.create({
             data: {
-              email: user.email as string,
+              email: token.email || "default.email@example.com",
               username: github_profile.login,
               github_id: token.sub as string,
             },
