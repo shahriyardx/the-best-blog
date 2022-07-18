@@ -43,6 +43,8 @@ model Post {
   category_id       String
   comments          Comment[]
   likes             Like[]
+  created_at        DateTime   @default(now())
+  updated_at        DateTime   @default(now())
 }
 
 model Comment {
