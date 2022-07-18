@@ -5,8 +5,8 @@ import React from "react";
 import { Children } from "types/common";
 
 type Props = {
-  children: Children 
-}
+  children: Children;
+};
 
 const RequireAuth = ({ children }: Props) => {
   const { status } = useSession();
@@ -17,7 +17,7 @@ const RequireAuth = ({ children }: Props) => {
       <ProfilePage>
         <p>Loading...</p>
       </ProfilePage>
-    )
+    );
   }
 
   if (status === "unauthenticated") {

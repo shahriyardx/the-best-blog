@@ -5,17 +5,14 @@ import CategoryForm from "components/single/CategoryForm/CategoryForm";
 import { NextPage } from "next";
 
 const Categories: NextPage = () => {
-  const { data: categories, refetch } = trpc.useQuery(['category.all'])
+  const { data: categories, refetch } = trpc.useQuery(["category.all"]);
 
   return (
     <AdminPage>
       <CategoryForm refetch={refetch} />
-      <DashCategories 
-        categories={categories} 
-        refetch={refetch} 
-      />
+      <DashCategories categories={categories} refetch={refetch} />
     </AdminPage>
-  )
-}
+  );
+};
 
-export default Categories
+export default Categories;

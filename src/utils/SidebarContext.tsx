@@ -1,19 +1,19 @@
-import { createContext, useState } from 'react'
+import { createContext, useState } from "react";
 import { Children } from "types/common";
 
-const SidebarContext = createContext({ open: false, toggle: () => {} })
+const SidebarContext = createContext({ open: false, toggle: () => {} });
 
-export const SidebarProvider = ({ children}: { children: Children }) => {
-  const [open, setOpen] = useState(false)
+export const SidebarProvider = ({ children }: { children: Children }) => {
+  const [open, setOpen] = useState(false);
   const toggle = () => {
-    setOpen(!open)
-  }
+    setOpen(!open);
+  };
 
   return (
     <SidebarContext.Provider value={{ open, toggle }}>
       {children}
     </SidebarContext.Provider>
-  )
-}
+  );
+};
 
-export default SidebarContext
+export default SidebarContext;

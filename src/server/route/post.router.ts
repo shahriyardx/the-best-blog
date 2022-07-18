@@ -1,37 +1,37 @@
-import { createRouter } from "../createRouter";
-import { PostSchema, PostUpdateSchema } from '@schema/post.schema'
-import { TRPCError } from "@trpc/server";
 import { CommentSchema } from "@schema/comment.schema";
+import { PostSchema, PostUpdateSchema } from "@schema/post.schema";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { createRouter } from "../createRouter";
 
 export const postRouter = createRouter()
-  .query('all', {
+  .query("all", {
     async resolve({ ctx }) {
       const posts = await ctx.prisma.post.findMany({
         where: {
           visibility: "PUBLIC",
         },
         include: {
-          Category: true
+          Category: true,
         },
         orderBy: {
-          created_at: "desc"
-        }
-      })
-      return posts
-    }
+          created_at: "desc",
+        },
+      });
+      return posts;
+    },
   })
-  .query('byId', {
+  .query("byId", {
     input: z.object({
-      post_id: z.string().uuid()
+      post_id: z.string().uuid(),
     }),
     async resolve({ ctx, input }) {
       const posts = await ctx.prisma.post.findFirst({
         where: {
           visibility: {
-            in: ['PUBLIC', 'UNLISTED'],
+            in: ["PUBLIC", "UNLISTED"],
           },
-          id: input.post_id
+          id: input.post_id,
         },
         select: {
           id: true,
@@ -43,8 +43,8 @@ export const postRouter = createRouter()
           likes: {
             select: {
               user_id: true,
-              post_id: true
-            }
+              post_id: true,
+            },
           },
           comments: {
             select: {
@@ -52,168 +52,168 @@ export const postRouter = createRouter()
               author: {
                 select: {
                   username: true,
-                  id: true
-                }
+                  id: true,
+                },
               },
               author_id: true,
-              post_id:  true,
-              content: true
-            }
+              post_id: true,
+              content: true,
+            },
           },
           author: {
             select: {
-              username: true
-            }
-          }
-        }
-      })
+              username: true,
+            },
+          },
+        },
+      });
 
-      return posts
-    }
+      return posts;
+    },
   })
-  .query('byCategoryId', {
+  .query("byCategoryId", {
     input: z.object({
-      category_id: z.string().uuid()
+      category_id: z.string().uuid(),
     }),
     async resolve({ ctx, input }) {
       const posts = await ctx.prisma.post.findMany({
         where: {
-          category_id: input.category_id
+          category_id: input.category_id,
         },
         include: {
-          Category: true
-        }
-      })
+          Category: true,
+        },
+      });
 
-      return posts
-    }
+      return posts;
+    },
   })
   .middleware(async ({ ctx, next }) => {
     if (!ctx.session) {
-      console.log("Session")
+      console.log("Session");
       throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You are not logged in"
-      })
+        code: "UNAUTHORIZED",
+        message: "You are not logged in",
+      });
     }
-    return next()
+    return next();
   })
-  .mutation('create', {
+  .mutation("create", {
     input: PostSchema,
     async resolve({ ctx, input }) {
       const post = await ctx.prisma.post.create({
-        data: {...input, author_id: ctx.session?.profile.id as string}
-      })
+        data: { ...input, author_id: ctx.session?.profile.id as string },
+      });
 
-      return post
-    }
+      return post;
+    },
   })
-  .mutation('addComment', {
+  .mutation("addComment", {
     input: CommentSchema,
     async resolve({ ctx, input }) {
       const comment = await ctx.prisma.comment.create({
-        data: {...input, author_id: ctx.session?.profile.id as string}
-      })
+        data: { ...input, author_id: ctx.session?.profile.id as string },
+      });
 
-      return comment
-    }
+      return comment;
+    },
   })
-  .mutation('toggleLike', {
+  .mutation("toggleLike", {
     input: z.object({
-      post_id: z.string().uuid()
+      post_id: z.string().uuid(),
     }),
     async resolve({ ctx, input }) {
       const liked = await ctx.prisma.like.findFirst({
         where: {
           post_id: input.post_id,
-          user_id: ctx.session?.profile.id as string
-        }
-      })
+          user_id: ctx.session?.profile.id as string,
+        },
+      });
 
       if (liked) {
         await ctx.prisma.like.delete({
           where: {
-            id: liked.id
-          }
-        })
+            id: liked.id,
+          },
+        });
       } else {
         await ctx.prisma.like.create({
           data: {
             post_id: input.post_id,
-            user_id: ctx.session?.profile.id as string
-          }
-        })
+            user_id: ctx.session?.profile.id as string,
+          },
+        });
       }
 
-      return { success: true }
-    }
+      return { success: true };
+    },
   })
-  .mutation('deleteById', {
+  .mutation("deleteById", {
     input: z.object({
-      post_id: z.string().uuid()
+      post_id: z.string().uuid(),
     }),
     async resolve({ ctx, input }) {
       const post = await ctx.prisma.post.findUnique({
         where: {
-          id: input.post_id
-        }
-      })
+          id: input.post_id,
+        },
+      });
 
       if (!post) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Post not found"
-        })
+          message: "Post not found",
+        });
       }
 
-      if (post.author_id !== ctx.session?.profile.id as string) {
+      if (post.author_id !== (ctx.session?.profile.id as string)) {
         throw new TRPCError({
           code: "FORBIDDEN",
-          message: "You are not allowed to delete this post"
-        })
+          message: "You are not allowed to delete this post",
+        });
       }
 
       await ctx.prisma.post.delete({
         where: {
-          id: input.post_id
-        }
-      })
+          id: input.post_id,
+        },
+      });
 
-      return { success: true }
-    }
+      return { success: true };
+    },
   })
-  .mutation('updateById', {
+  .mutation("updateById", {
     input: PostUpdateSchema,
-    async resolve({ ctx, input}) {
+    async resolve({ ctx, input }) {
       const post = await ctx.prisma.post.findUnique({
         where: {
-          id: input.post_id
-        }
-      })
+          id: input.post_id,
+        },
+      });
 
       if (!post) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Post not found"
-        })
+          message: "Post not found",
+        });
       }
 
-      if (post.author_id !== ctx.session?.profile.id as string) {
+      if (post.author_id !== (ctx.session?.profile.id as string)) {
         throw new TRPCError({
           code: "FORBIDDEN",
-          message: "You are not allowed to delete this post"
-        })
+          message: "You are not allowed to delete this post",
+        });
       }
-      
-      const {post_id, ...postData} = input
+
+      const { post_id, ...postData } = input;
 
       await ctx.prisma.post.update({
         where: {
-          id: input.post_id
+          id: input.post_id,
         },
-        data: postData
-      })
+        data: postData,
+      });
 
-      return { success: true }
-    }
-  })
+      return { success: true };
+    },
+  });

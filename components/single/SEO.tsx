@@ -2,19 +2,20 @@ import Head from "next/head";
 import React from "react";
 
 type Props = {
-  title?: string
-  description?: string
-  keywords?: string
-  author?: string
-}
+  title?: string;
+  description?: string;
+  keywords?: string;
+  author?: string;
+};
 
-const SEO = ({ title, description, keywords, author }: Props ) => {
-  const _title = title ? `${title} - The Best` : "The Best - By the best for the best";
+const SEO = ({ title, description, keywords, author }: Props) => {
+  const _title = title
+    ? `${title} - The Best`
+    : "The Best - By the best for the best";
   const _description =
     description ||
     "The best is the best blogging platform for developers by developers";
-  const _keywords =
-    keywords || "";
+  const _keywords = keywords || "";
   const _author = author || "The Best";
   return (
     <Head>

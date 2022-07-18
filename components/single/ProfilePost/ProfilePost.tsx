@@ -1,53 +1,52 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Post } from '@prisma/client'
-import Link from 'next/link'
-import React, { Fragment, useState } from 'react'
-import toast from 'react-hot-toast'
-import { trpc } from '@utils/trpc'
-
+import { Dialog, Transition } from "@headlessui/react";
+import { Post } from "@prisma/client";
+import Link from "next/link";
+import React, { Fragment, useState } from "react";
+import toast from "react-hot-toast";
+import { trpc } from "@utils/trpc";
 
 type Props = {
-  post: Pick<Post, "id" | "title" | "short_description">
-  refetch: () => void
-}
+  post: Pick<Post, "id" | "title" | "short_description">;
+  refetch: () => void;
+};
 
-const ProfilePost = ({ post, refetch }: Props ) => {
-  const [open, setOpen] = useState<boolean>(false)
-  const { mutate } = trpc.useMutation(['posts.deleteById'], {
+const ProfilePost = ({ post, refetch }: Props) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const { mutate } = trpc.useMutation(["posts.deleteById"], {
     onError: (error) => {
-      toast.error(error.message)
+      toast.error(error.message);
     },
     onSuccess: () => {
-      setOpen(false)
-      toast.success("Post deleted")
-      refetch()
-    }
-  })
-  
+      setOpen(false);
+      toast.success("Post deleted");
+      refetch();
+    },
+  });
+
   const deletePost = () => {
-    mutate({ post_id: post.id })
-  }
+    mutate({ post_id: post.id });
+  };
 
   return (
-    <div className='p-5 rounded-md dark:bg-zinc-800 bg-[bisque]'>
-      <h2
-        className='text-2xl font-bold dark:text-zinc-300'
-      >
-        {post.title}
-      </h2>
-      <p className='dark:text-zinc-400 mt-2 mb-4'>
-        {post.short_description}
-      </p>
-      <div className='flex gap-2 text-lg'>
+    <div className="p-5 rounded-md dark:bg-zinc-800 bg-[bisque]">
+      <h2 className="text-2xl font-bold dark:text-zinc-300">{post.title}</h2>
+      <p className="dark:text-zinc-400 mt-2 mb-4">{post.short_description}</p>
+      <div className="flex gap-2 text-lg">
         <Link href={`/u/posts/edit/${post.id}`} passHref>
-          <a className='text-black dark:text-zinc-300'>Edit</a>
+          <a className="text-black dark:text-zinc-300">Edit</a>
         </Link>
 
-        <button onClick={() => setOpen(true)} className='text-red-500'>Delete</button>
+        <button onClick={() => setOpen(true)} className="text-red-500">
+          Delete
+        </button>
       </div>
 
       <Transition appear show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => setOpen(false)}>
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => setOpen(false)}
+        >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -76,11 +75,13 @@ const ProfilePost = ({ post, refetch }: Props ) => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Delete post <span className='text-blue-500'>{post.title}</span>?
+                    Delete post{" "}
+                    <span className="text-blue-500">{post.title}</span>?
                   </Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      This action can&apos;t be reverted once confimed. Do you want to proceed?
+                      This action can&apos;t be reverted once confimed. Do you
+                      want to proceed?
                     </p>
                   </div>
 
@@ -98,7 +99,7 @@ const ProfilePost = ({ post, refetch }: Props ) => {
                       className="inline-flex justify-center rounded-md border border-transparent px-4 py-2 text-sm font-medium text-black hover:bg-zinc-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={() => setOpen(false)}
                     >
-                     Cancel
+                      Cancel
                     </button>
                   </div>
                 </Dialog.Panel>
@@ -108,7 +109,7 @@ const ProfilePost = ({ post, refetch }: Props ) => {
         </Dialog>
       </Transition>
     </div>
-  )
-}
+  );
+};
 
-export default ProfilePost
+export default ProfilePost;

@@ -6,7 +6,7 @@ const Dashboard: NextPage = () => {
     <AdminPage>
       <span>WTF</span>
     </AdminPage>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

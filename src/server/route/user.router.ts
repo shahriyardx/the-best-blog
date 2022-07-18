@@ -1,62 +1,61 @@
-import { createRouter } from "../createRouter";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { createRouter } from "../createRouter";
 
 export const userRouter = createRouter()
   .middleware(async ({ ctx, next }) => {
     if (!ctx.session) {
-      console.log("Session")
+      console.log("Session");
       throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "You are not logged in"
-      })
+        code: "UNAUTHORIZED",
+        message: "You are not logged in",
+      });
     }
-    return next()
+    return next();
   })
-  .query('posts', {
+  .query("posts", {
     async resolve({ ctx }) {
       const posts = await ctx.prisma.post.findMany({
         where: {
-          author_id: ctx.session?.profile.id as string
+          author_id: ctx.session?.profile.id as string,
         },
         select: {
           id: true,
           title: true,
-          short_description: true
+          short_description: true,
         },
         orderBy: {
-          created_at: "desc"
-        }
-      })
-      return posts
-    }
+          created_at: "desc",
+        },
+      });
+      return posts;
+    },
   })
-  .query('postById', {
+  .query("postById", {
     input: z.object({
-      post_id: z.string().uuid()
+      post_id: z.string().uuid(),
     }),
     async resolve({ ctx, input }) {
       const post = await ctx.prisma.post.findFirst({
         where: {
-          id: input.post_id
+          id: input.post_id,
         },
-      })
+      });
 
       if (!post) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Post not found"
-        })
+          message: "Post not found",
+        });
       }
 
-      if (post.author_id !== ctx.session?.profile.id as string) {
+      if (post.author_id !== (ctx.session?.profile.id as string)) {
         throw new TRPCError({
           code: "FORBIDDEN",
-          message: "You dont have permission to access this"
-        })
+          message: "You dont have permission to access this",
+        });
       }
 
-      return post
-    }
-  })
-  
+      return post;
+    },
+  });

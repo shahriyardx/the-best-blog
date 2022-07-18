@@ -6,7 +6,7 @@ const Posts: NextPage = () => {
     <AdminPage>
       <span>WTF</span>
     </AdminPage>
-  )
-}
+  );
+};
 
-export default Posts
+export default Posts;

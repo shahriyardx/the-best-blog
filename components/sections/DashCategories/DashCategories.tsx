@@ -1,28 +1,28 @@
-import { Category } from "@prisma/client"
-import { trpc } from "@utils/trpc"
-import { useState } from "react"
-import toast from "react-hot-toast"
+import { Category } from "@prisma/client";
+import { trpc } from "@utils/trpc";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
-type Props = { 
-  refetch: () => void, 
-  categories: Pick<Category, "id" | "name" | "slug">[] | undefined
-}
+type Props = {
+  refetch: () => void;
+  categories: Pick<Category, "id" | "name" | "slug">[] | undefined;
+};
 
-const DashCategories = ({ categories, refetch} : Props) => {
-  const [delId, setDelId] = useState<string>()
-  const { mutate } = trpc.useMutation(['category.deleteById'], {
+const DashCategories = ({ categories, refetch }: Props) => {
+  const [delId, setDelId] = useState<string>();
+  const { mutate } = trpc.useMutation(["category.deleteById"], {
     onError: (error) => {
-      toast.error(error.message)
+      toast.error(error.message);
     },
     onSuccess: (error) => {
-      refetch()
-    }
-  })
-  
+      refetch();
+    },
+  });
+
   const confirmDelete = () => {
-    if (!delId) return
-    mutate({ category_id: delId })
-  }
+    if (!delId) return;
+    mutate({ category_id: delId });
+  };
 
   return (
     <div className="mt-10">
@@ -35,26 +35,43 @@ const DashCategories = ({ categories, refetch} : Props) => {
           <th className="text-left px-4 py-2 whitespace-nowrap">Actions</th>
         </thead>
         <tbody>
-          {categories?.map(cat => {
+          {categories?.map((cat) => {
             return (
-              <tr key={cat.id} className="even:bg-zinc-300 dark:text-zinc-300 dark:even:bg-zinc-800">
-                <td className="text-left px-4 py-2 whitespace-nowrap">{cat.name}</td>
-                <td className="text-left px-4 py-2 whitespace-nowrap">{cat.slug}</td>
+              <tr
+                key={cat.id}
+                className="even:bg-zinc-300 dark:text-zinc-300 dark:even:bg-zinc-800"
+              >
+                <td className="text-left px-4 py-2 whitespace-nowrap">
+                  {cat.name}
+                </td>
+                <td className="text-left px-4 py-2 whitespace-nowrap">
+                  {cat.slug}
+                </td>
                 <td className="text-left px-4 py-2 whitespace-nowrap">
                   {delId !== cat.id && (
-                      <button onClick={() => setDelId(cat.id)} className="px-2 py-1 rounded-md bg-green-500 hover:bg-green-600 text-white">Delete</button> 
+                    <button
+                      onClick={() => setDelId(cat.id)}
+                      className="px-2 py-1 rounded-md bg-green-500 hover:bg-green-600 text-white"
+                    >
+                      Delete
+                    </button>
                   )}
                   {delId === cat.id && (
-                    <button onClick={() => confirmDelete()} className="px-2 py-1 rounded-md bg-red-500 hover:bg-red-600 text-white">Confim</button>
+                    <button
+                      onClick={() => confirmDelete()}
+                      className="px-2 py-1 rounded-md bg-red-500 hover:bg-red-600 text-white"
+                    >
+                      Confim
+                    </button>
                   )}
                 </td>
               </tr>
-            )
+            );
           })}
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default DashCategories
+export default DashCategories;

@@ -1,12 +1,12 @@
-import ProfilePage from "components/Layouts/ProfilePage";
+import React from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React from "react";
 import { Children } from "types/common";
+import ProfilePage from "components/Layouts/ProfilePage";
 
 type Props = {
-  children: Children 
-}
+  children: Children;
+};
 
 const RequireAdmin = ({ children }: Props) => {
   const { data: session, status } = useSession();
@@ -17,10 +17,14 @@ const RequireAdmin = ({ children }: Props) => {
       <ProfilePage>
         <p>Loading...</p>
       </ProfilePage>
-    )
+    );
   }
 
-  if (status === "unauthenticated" || !session?.profile.is_admin || !session?.profile.is_active) {
+  if (
+    status === "unauthenticated" ||
+    !session?.profile.is_admin ||
+    !session?.profile.is_active
+  ) {
     router.push("/");
   }
 
