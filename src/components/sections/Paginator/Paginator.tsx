@@ -1,17 +1,16 @@
-import { IPost } from '@database/schemas/Post'
 import { POSTS_PER_PAGE } from 'config'
 import { useRouter } from 'next/router'
 import React from 'react'
 import PaginatorPage from './PaginatorPage'
 
 type Props = {
-  posts: IPost[]
+  posts: number
 }
 
 const Paginator = ({ posts }: Props ) => {
   const router = useRouter()
   
-  const pages = Math.ceil(posts.length / POSTS_PER_PAGE)
+  const pages = Math.ceil(posts / POSTS_PER_PAGE)
   const page = Number(router.query.page) || 1
 
   return (

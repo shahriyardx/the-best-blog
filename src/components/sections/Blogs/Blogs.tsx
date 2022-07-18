@@ -37,7 +37,7 @@ const Blogs = ({ category }: Props ) => {
         })}
       </div>
 
-      <Paginator posts={posts} />
+      <Paginator posts={posts.length} />
     </section>
   )
 }

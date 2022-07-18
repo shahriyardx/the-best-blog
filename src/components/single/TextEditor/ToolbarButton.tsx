@@ -1,5 +1,5 @@
 import React from 'react'
-import { Children } from "types/common";
+import { Children } from "src/types/common";
 
 type Props = {
   children: Children
