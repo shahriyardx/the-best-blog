@@ -1,18 +1,34 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Post } from '@prisma/client'
-import { API_BASE } from 'config'
 import Link from 'next/link'
 import React, { Fragment, useState } from 'react'
 import toast from 'react-hot-toast'
+import { trpc } from 'src/utils/trpc'
 
 
 type Props = {
   post: Pick<Post, "id" | "title" | "short_description">
+  refetch: () => void
 }
 
-const ProfilePost = ({ post }: Props ) => {
+const ProfilePost = ({ post, refetch }: Props ) => {
   const [open, setOpen] = useState<boolean>(false)
+  const { mutate } = trpc.useMutation(['posts.deleteById'], {
+    onError: (error) => {
+      toast.error(error.message)
+    },
+    onSuccess: () => {
+      setOpen(false)
+      toast.success("Post deleted")
+      refetch()
+    }
+  })
   
+  const deletePost = () => {
+    console.log(post.id)
+    mutate({ post_id: post.id })
+  }
+
   return (
     <div className='p-5 rounded-md dark:bg-zinc-800 bg-[bisque]'>
       <h2
@@ -71,7 +87,7 @@ const ProfilePost = ({ post }: Props ) => {
 
                   <div className="mt-4 flex gap-3">
                     <button
-                      onClick={() => {}}
+                      onClick={deletePost}
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-black hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     >

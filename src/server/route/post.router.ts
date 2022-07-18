@@ -150,3 +150,44 @@ export const postRouter = createRouter()
       return { success: true }
     }
   })
+  .mutation('deleteById', {
+    input: z.object({
+      post_id: z.string().uuid()
+    }),
+    async resolve({ ctx, input }) {
+      if (!ctx.session) {
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "You are not logged in"
+        })
+      }
+
+      const post = await ctx.prisma.post.findUnique({
+        where: {
+          id: input.post_id
+        }
+      })
+
+      if (!post) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Post not found"
+        })
+      }
+
+      if (post.author_id !== ctx.session.profile.id) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: "You are not allowed to delete this post"
+        })
+      }
+
+      await ctx.prisma.post.delete({
+        where: {
+          id: input.post_id
+        }
+      })
+
+      return { success: true }
+    }
+  })
