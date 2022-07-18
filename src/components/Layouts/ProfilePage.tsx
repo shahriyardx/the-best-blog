@@ -14,8 +14,8 @@ const ProfilePage = ({ children }: Props) => {
       <div className='container mx-auto grid grid-cols-1 sm:grid-cols-sidebarLayout gap-5 px-5 sm:px-7 md:px-10 mt-3 sm:mt-5 md:mt-10'>
         <Sidebar>
           <div className='flex flex-col gap-2'>
-            <SidebarLink href='/profile/posts'>Posts</SidebarLink>
-            <SidebarLink href='/profile/posts/create'>New Post</SidebarLink>
+            <SidebarLink href='/u/posts'>Posts</SidebarLink>
+            <SidebarLink href='/u/posts/create'>New Post</SidebarLink>
           </div>
         </Sidebar>
         <div className='pb-10 min-h-[90vh]'>

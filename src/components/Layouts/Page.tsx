@@ -63,7 +63,7 @@ const Page = ({ children }: Props) => {
                   </button>
                 ) : (
                   <>
-                    <SidebarLink href='/profile/posts'>My Posts</SidebarLink>
+                    <SidebarLink href='/u/posts'>My Posts</SidebarLink>
                     <button
                       onClick={() => signOut()}
                       className='

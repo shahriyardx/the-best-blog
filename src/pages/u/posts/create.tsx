@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { NextPage } from 'next'
 import ProfilePage from '@layouts/ProfilePage'
 import TextEditor from '@components/TextEditor/TextEditor';
@@ -100,7 +100,7 @@ const CreatePost: NextPage & { requireAuth: boolean } = () => {
           </div>
         </div>
 
-        <TextEditor value={value} setValue={setValue}  />
+        <TextEditor value={value} setValue={(value: string | undefined) => setValue(value || "")}  />
         
         <div>
           <button className='px-5 py-3 bg-[orange] text-white dark:bg-zinc-700'>
