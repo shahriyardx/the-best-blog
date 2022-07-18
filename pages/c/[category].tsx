@@ -24,9 +24,9 @@ const CategoryPosts: NextPage = () => {
 
   return (
     <Page>
-      <SEO title={`Category : ${category?.id}`} />
+      <SEO title={`Category : ${category?.name}`} />
       <div className='flex justify-between items-center mb-10'>
-        <h1 className='text-2xl sm:text-3xl md:text-4xl font-bold dark:text-zinc-200 flex gap-2'>
+        <h1 className='text-base sm:text-2xl md:text-4xl font-bold dark:text-zinc-200 flex gap-2'>
           <span>
             Category {"=>"}
           </span>
@@ -36,8 +36,8 @@ const CategoryPosts: NextPage = () => {
         </h1>
 
         <Link href='/'>
-          <a className='px-5 py-3 text-lg flex items-center gap-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 dark:text-zinc-300 rounded-full'>
-            <BiChevronLeft className='text-2xl' />
+          <a className='px-5 py-3 text-sm flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-800 dark:text-zinc-300 rounded-full'>
+            <BiChevronLeft className='text-xl' />
             <span>
               Go Back
             </span> 
