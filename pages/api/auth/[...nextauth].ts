@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
         if (!db_user) {
           db_user = await prisma.user.create({
             data: {
-              email: token.email || "default.email@example.com",
+              email: user.email || "default.email@example.com",
               username: github_profile.login,
               github_id: token.sub as string,
             },
@@ -42,6 +42,7 @@ export const authOptions: NextAuthOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID || "",
       clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
+      authorization: { params: { scope: "user" } },
     }),
   ],
 };
