@@ -30,7 +30,12 @@ export const postRouter = createRouter()
           },
           id: input.post_id
         },
-        include: {
+        select: {
+          id: true,
+          title: true,
+          short_description: true,
+          content: true,
+          created_at: true,
           Category: true,
           likes: {
             select: {

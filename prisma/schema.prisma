@@ -39,8 +39,8 @@ model Post {
   author_id         String
   content           String     @db.Text
   visibility        Visibility @default(PUBLIC)
-  Category          Category   @relation(fields: [category_id], references: [id])
-  category_id       String
+  Category          Category?  @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  category_id       String?
   comments          Comment[]
   likes             Like[]
   created_at        DateTime   @default(now())

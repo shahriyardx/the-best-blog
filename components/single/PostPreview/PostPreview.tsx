@@ -10,6 +10,7 @@ import javascript from "highlight.js/lib/languages/javascript"; //@ts-ignore
 
 import "highlight.js/styles/atom-one-dark.css";
 import { Post, Comment, Like, Category, User } from '@prisma/client';
+import { ISODateString } from 'next-auth';
 
 Lowlight.registerLanguage("js", javascript);
 Lowlight.registerLanguage("py", python);
@@ -17,7 +18,7 @@ Lowlight.registerLanguage("md", markdown);
 
 
 interface Props {
-  post: Post & { Category: Category, likes: Like[], comments: Comment[], author: User}
+  post: Post & { Category: Category, likes: Like[], comments: Comment[], author: User, created_at: ISODateString }
 }
 
 const PostPreview = ({ post }: Props) => {
@@ -39,7 +40,7 @@ const PostPreview = ({ post }: Props) => {
 
         <div className='flex gap-2 items-center'>
           <BiTime />
-          {/* <span>{moment(post).format("MMMM DD, YYYY")}</span> */}
+          <span>{moment(post.created_at).format("MMMM DD, YYYY")}</span>
         </div>
       </div>
 

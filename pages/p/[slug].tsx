@@ -15,9 +15,10 @@ import LikesAndComments from 'components/single/PostPreview/LikesAndComments'
 import { trpc } from '@utils/trpc';
 import CommentForm from 'components/single/PostPreview/CommentForm';
 import Comments from 'components/single/PostPreview/Comments';
+import { ISODateString } from 'next-auth';
 
 interface Props {
-  post: Post & { Category: Category, likes: Like[], comments: Comment[], author: User}
+  post: Post & { Category: Category, likes: Like[], comments: Comment[], author: User, created_at: ISODateString }
 }
 
 const SinglePost: NextPage<Props> = ({ post }) => {
@@ -102,13 +103,32 @@ export const getStaticProps = async (context: GetStaticPropsContext<{slug: strin
     ctx: await createContext({})
   });
 
-  const posts = await ssg.fetchQuery('posts.byId', {
-    post_id: slug
-  })
+  try {
+    const post = await ssg.fetchQuery('posts.byId', {
+      post_id: slug
+    })
 
-  return {
-    props: {
-      post: posts
+    if (!post) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false
+        }
+      }
+    }
+    const modifiedPost = { ...post, created_at: post.created_at.toISOString() }
+
+    return {
+      props: {
+        post: modifiedPost
+      }
+    }
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false
+      }
     }
   }
 };

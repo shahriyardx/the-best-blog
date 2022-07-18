@@ -19,14 +19,14 @@ const BlogCard = ({ post }: Props) => {
           {post.title}
         </a>
       </Link>
-      <Link href={`/c/${post.Category.slug}`} passHref>
+      <Link href={`/c/${post.Category.slug || 'uncategorized'}`} passHref>
         <a 
           className='
             uppercase inline-block
             tracking-wider text-zinc-400 mt-3
           '
           >
-            {post.Category.name}
+            {post.Category?.name || 'Uncategorized'}
         </a>
       </Link>
       <p className='text-zinc-700 dark:text-zinc-500 mt-1'>
