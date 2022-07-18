@@ -10,9 +10,13 @@ import { SidebarProvider } from "@utils/SidebarContext";
 import { NextComponentType } from "next";
 import RequireAuth from "components/auth/requireAuth";
 import { Toaster } from "react-hot-toast";
+import RequireAdmin from "components/auth/requireAdmin";
 
 type CustomAppProps = AppProps & {
-  Component: NextComponentType & { requireAuth: boolean };
+  Component: NextComponentType & {
+    requireAuth?: boolean;
+    requireAdmin?: boolean;
+  };
 };
 
 const TheBest = ({
@@ -26,6 +30,10 @@ const TheBest = ({
           <RequireAuth>
             <Component {...pageProps} />
           </RequireAuth>
+        ) : Component.requireAdmin ? (
+          <RequireAdmin>
+            <Component {...pageProps} />
+          </RequireAdmin>
         ) : (
           <Component {...pageProps} />
         )}

@@ -4,7 +4,7 @@ import DashCategories from "components/sections/DashCategories/DashCategories";
 import CategoryForm from "components/single/CategoryForm/CategoryForm";
 import { NextPage } from "next";
 
-const Categories: NextPage = () => {
+const Categories: NextPage & { requireAdmin: boolean } = () => {
   const { data: categories, refetch } = trpc.useQuery(["category.all"]);
 
   return (
@@ -15,4 +15,5 @@ const Categories: NextPage = () => {
   );
 };
 
+Categories.requireAdmin = true;
 export default Categories;
