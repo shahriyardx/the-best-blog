@@ -15,10 +15,10 @@ const EditPost = () => {
   const { data: categories, isLoading: catLoading } = trpc.useQuery([
     "category.all",
   ]);
-  const { data: post, isLoading: postLoading } = trpc.useQuery([
-    "user.postById",
-    { post_id: postId },
-  ]);
+  const { data: post, isLoading: postLoading } = trpc.useQuery(
+    ["user.postById", { post_id: postId }],
+    { refetchOnWindowFocus: false }
+  );
   const { mutate } = trpc.useMutation(["posts.updateById"], {
     onSuccess: () => {
       toast.success("Post updated");
