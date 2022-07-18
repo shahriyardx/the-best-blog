@@ -1,8 +1,11 @@
+import AdminPage from "components/Layouts/AdminPage";
 import { NextPage } from "next";
 
 const Categories: NextPage = () => {
   return (
-    <>Hello</>
+    <AdminPage>
+      <span>WTF</span>
+    </AdminPage>
   )
 }
 
