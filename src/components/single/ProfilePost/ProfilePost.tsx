@@ -25,7 +25,6 @@ const ProfilePost = ({ post, refetch }: Props ) => {
   })
   
   const deletePost = () => {
-    console.log(post.id)
     mutate({ post_id: post.id })
   }
 

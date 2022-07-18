@@ -21,7 +21,6 @@ interface Props {
 }
 
 const PostPreview = ({ post }: Props) => {
-  console.log(post)
   const renderer = {
     code(snippet: string, lang: string) {
       return <Lowlight key={snippet} language={lang} value={snippet} />;
