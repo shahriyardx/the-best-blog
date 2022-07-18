@@ -14,7 +14,7 @@ export const userRouter = createRouter()
     return next()
   })
   .query('posts', {
-    async resolve({ ctx, input }) {
+    async resolve({ ctx }) {
       const posts = await ctx.prisma.post.findMany({
         where: {
           author_id: ctx.session?.profile.id as string
