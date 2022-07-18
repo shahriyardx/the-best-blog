@@ -214,6 +214,10 @@ export const postRouter = createRouter()
         data: postData,
       });
 
+      try {
+        await ctx.res?.revalidate(`/p/${post.id}`);
+      } catch (_) {}
+
       return { success: true };
     },
   });

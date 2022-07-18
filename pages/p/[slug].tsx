@@ -133,6 +133,7 @@ export const getStaticProps = async (
       props: {
         post: modifiedPost,
       },
+      revalidate: 600,
     };
   } catch (error) {
     return {
