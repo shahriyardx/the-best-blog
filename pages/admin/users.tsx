@@ -75,7 +75,10 @@ const DashboardUsers: NextPage & { requireAdmin: boolean } = () => {
         <div>
           {users?.map((user) => {
             return (
-              <div className="grid grid-cols-4 gap-5 dark:text-zinc-300 px-5 py-3">
+              <div
+                key={user.id}
+                className="grid grid-cols-4 gap-5 dark:text-zinc-300 px-5 py-3"
+              >
                 <div className="truncate">{user.username}</div>
                 <div>
                   {user.is_admin ? (

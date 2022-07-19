@@ -36,7 +36,10 @@ const Posts: NextPage & { requireAdmin: boolean } = () => {
         <div>
           {posts?.map((post) => {
             return (
-              <div className="grid grid-cols-7 gap-5 dark:text-zinc-300 px-5 py-3">
+              <div
+                key={post.id}
+                className="grid grid-cols-7 gap-5 dark:text-zinc-300 px-5 py-3"
+              >
                 <div className="col-span-3 truncate">{post.title}</div>
                 <div>{post.Category.name}</div>
                 <div>{post.author.username}</div>
