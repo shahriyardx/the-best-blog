@@ -1,4 +1,5 @@
 import { TRPCError } from "@trpc/server";
+import { z } from "zod";
 import { createRouter } from "../createRouter";
 
 export const adminRouter = createRouter()
@@ -36,5 +37,19 @@ export const adminRouter = createRouter()
       });
 
       return posts;
+    },
+  })
+  .mutation("deletePostById", {
+    input: z.object({
+      post_id: z.string().uuid(),
+    }),
+    async resolve({ ctx, input }) {
+      await ctx.prisma.post.delete({
+        where: {
+          id: input.post_id,
+        },
+      });
+
+      return { success: true };
     },
   });
