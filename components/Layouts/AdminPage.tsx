@@ -15,6 +15,7 @@ const AdminPage = ({ children }: Props) => {
         <Sidebar>
           <div className="flex flex-col gap-2">
             <SidebarLink href="/admin">Dashboard</SidebarLink>
+            <SidebarLink href="/admin/users">Users</SidebarLink>
             <SidebarLink href="/admin/posts">Posts</SidebarLink>
             <SidebarLink href="/admin/categories">Categories</SidebarLink>
           </div>
