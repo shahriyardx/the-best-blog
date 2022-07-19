@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import Router from "next/router";
 import { BiX } from "react-icons/bi";
 import { Children } from "types/common";
 import SidebarContext from "@utils/SidebarContext";
@@ -9,6 +10,7 @@ type Props = {
 
 const Sidebar = ({ children }: Props) => {
   const { open, toggle } = useContext(SidebarContext);
+  Router.events.on("routeChangeComplete", () => toggle(false));
 
   return (
     <div
@@ -23,7 +25,7 @@ const Sidebar = ({ children }: Props) => {
       <div className="flex flex-col gap-10 sm:sticky sm:top-5">{children}</div>
 
       <BiX
-        onClick={toggle}
+        onClick={() => toggle()}
         className="
           absolute top-5 right-5 sm:hidden 
           text-2xl cursor-pointer
