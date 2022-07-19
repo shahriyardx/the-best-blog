@@ -52,4 +52,103 @@ export const adminRouter = createRouter()
 
       return { success: true };
     },
+  })
+  .query("allUsers", {
+    async resolve({ ctx }) {
+      const users = await ctx.prisma.user.findMany({
+        select: {
+          id: true,
+          username: true,
+          is_admin: true,
+          is_active: true,
+        },
+        orderBy: {
+          created_at: "desc",
+        },
+      });
+
+      return users;
+    },
+  })
+  .mutation("makeUserAdmin", {
+    input: z.object({
+      user_id: z.string().uuid(),
+    }),
+    async resolve({ ctx, input }) {
+      await ctx.prisma.user.update({
+        where: {
+          id: input.user_id,
+        },
+        data: {
+          is_admin: true,
+        },
+      });
+
+      return { success: true };
+    },
+  })
+  .mutation("removeUserAdmin", {
+    input: z.object({
+      user_id: z.string().uuid(),
+    }),
+    async resolve({ ctx, input }) {
+      await ctx.prisma.user.update({
+        where: {
+          id: input.user_id,
+        },
+        data: {
+          is_admin: false,
+        },
+      });
+
+      return { success: true };
+    },
+  })
+  .mutation("activateUser", {
+    input: z.object({
+      user_id: z.string().uuid(),
+    }),
+    async resolve({ ctx, input }) {
+      await ctx.prisma.user.update({
+        where: {
+          id: input.user_id,
+        },
+        data: {
+          is_active: true,
+        },
+      });
+
+      return { success: true };
+    },
+  })
+  .mutation("deactivateUser", {
+    input: z.object({
+      user_id: z.string().uuid(),
+    }),
+    async resolve({ ctx, input }) {
+      await ctx.prisma.user.update({
+        where: {
+          id: input.user_id,
+        },
+        data: {
+          is_active: false,
+        },
+      });
+
+      return { success: true };
+    },
+  })
+  .mutation("deleteUserById", {
+    input: z.object({
+      user_id: z.string().uuid(),
+    }),
+    async resolve({ ctx, input }) {
+      await ctx.prisma.user.delete({
+        where: {
+          id: input.user_id,
+        },
+      });
+
+      return { success: true };
+    },
   });
