@@ -35,7 +35,7 @@ model Post {
   id                String     @id @default(uuid())
   title             String     @db.VarChar(128)
   short_description String     @db.VarChar(256)
-  author            User       @relation(fields: [author_id], references: [id])
+  author            User       @relation(fields: [author_id], references: [id], onDelete: Cascade)
   author_id         String
   content           String     @db.Text
   visibility        Visibility @default(PUBLIC)
