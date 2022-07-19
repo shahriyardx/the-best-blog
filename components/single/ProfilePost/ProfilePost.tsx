@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { trpc } from "@utils/trpc";
 
 type Props = {
-  post: Pick<Post, "id" | "title" | "short_description">;
+  post: Pick<Post, "id" | "title" | "short_description" | "visibility">;
   refetch: () => void;
 };
 
@@ -35,6 +35,12 @@ const ProfilePost = ({ post, refetch }: Props) => {
         <Link href={`/u/posts/edit/${post.id}`} passHref>
           <a className="text-black dark:text-zinc-300">Edit</a>
         </Link>
+
+        {post.visibility !== "PRIVATE" && (
+          <Link href={`/p/${post.id}`} passHref>
+            <a className="text-blue-500">Preview</a>
+          </Link>
+        )}
 
         <button onClick={() => setOpen(true)} className="text-red-500">
           Delete

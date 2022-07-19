@@ -23,6 +23,7 @@ export const userRouter = createRouter()
           id: true,
           title: true,
           short_description: true,
+          visibility: true,
         },
         orderBy: {
           created_at: "desc",
