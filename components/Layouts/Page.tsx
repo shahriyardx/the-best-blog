@@ -4,6 +4,7 @@ import Sidebar from "components/sections/Sidebar/Sidebar";
 import { signIn, signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
 import { trpc } from "@utils/trpc";
+import CategoriesSkeleaton from "components/single/Skeleaton/CategoriesSkeleaton";
 
 type Props = {
   children: React.ReactNode | React.ReactNode[];
@@ -12,7 +13,9 @@ type Props = {
 const Page = ({ children }: Props) => {
   const { data: session, status } = useSession();
   const [allcat, setAllCat] = useState<boolean>(false);
-  const { data: categories, isLoading } = trpc.useQuery(["category.all"]);
+  const { data: categories, isLoading } = trpc.useQuery(["category.all"], {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>
@@ -28,57 +31,7 @@ const Page = ({ children }: Props) => {
           <div>
             <h3 className="uppercase font-semibold text-lg">👜 Categories</h3>
             <div className="flex flex-col gap-2 mt-3">
-              {isLoading && (
-                <>
-                  <div
-                    className="h-3 bg-zinc-700"
-                    style={{
-                      width: "100%",
-                      maxWidth: `${Math.floor(Math.random() * 20 + 50)}px`,
-                    }}
-                  />
-
-                  <div
-                    className="h-3 bg-zinc-700"
-                    style={{
-                      width: "100%",
-                      maxWidth: `${Math.floor(Math.random() * 20 + 50)}px`,
-                    }}
-                  />
-
-                  <div
-                    className="h-3 bg-zinc-700"
-                    style={{
-                      width: "100%",
-                      maxWidth: `${Math.floor(Math.random() * 40 + 20)}px`,
-                    }}
-                  />
-
-                  <div
-                    className="h-3 bg-zinc-700"
-                    style={{
-                      width: "100%",
-                      maxWidth: `${Math.floor(Math.random() * 20 + 50)}px`,
-                    }}
-                  />
-
-                  <div
-                    className="h-3 bg-zinc-700"
-                    style={{
-                      width: "100%",
-                      maxWidth: `${Math.floor(Math.random() * 20 + 50)}px`,
-                    }}
-                  />
-
-                  <div
-                    className="h-3 bg-zinc-700"
-                    style={{
-                      width: "100%",
-                      maxWidth: `${Math.floor(Math.random() * 20 + 50)}px`,
-                    }}
-                  />
-                </>
-              )}
+              {!isLoading && <CategoriesSkeleaton />}
               {categories?.slice(0, allcat ? undefined : 5).map((category) => (
                 <SidebarLink key={category.id} href={`/c/${category.slug}`}>
                   {category.name}
