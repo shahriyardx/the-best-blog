@@ -1,4 +1,3 @@
-import { User } from "@prisma/client";
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
@@ -34,7 +33,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     session({ session, token }) {
-      session.profile = token.profile as User;
+      session.profile = token.profile;
       return session;
     },
   },
