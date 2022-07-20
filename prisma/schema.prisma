@@ -75,9 +75,9 @@ model Like {
 model Notification {
   id             String           @id @default(uuid())
   type           NotificationType
-  user           User             @relation(name: "myNotifications", fields: [user_id], references: [id], onDelete: Cascade)
+  user           User             @relation(name: "relatedNotifications", fields: [user_id], references: [id], onDelete: Cascade)
   user_id        String
-  target_user    User             @relation(name: "relatedNotifications", fields: [target_user_id], references: [id], onDelete: Cascade)
+  target_user    User             @relation(name: "myNotifications", fields: [target_user_id], references: [id], onDelete: Cascade)
   target_user_id String
   post           Post?            @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id        String?
