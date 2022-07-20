@@ -11,17 +11,18 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(uuid())
-  email      String    @unique @db.VarChar(255)
-  username   String    @unique @db.VarChar(100)
-  github_id  String    @unique @db.VarChar(100)
-  is_admin   Boolean   @default(false)
-  is_active  Boolean   @default(true)
-  created_at DateTime  @default(now())
-  updated_at DateTime  @default(now())
-  posts      Post[]
-  comments   Comment[]
-  likes      Like[]
+  id            String         @id @default(uuid())
+  email         String         @unique @db.VarChar(255)
+  username      String         @unique @db.VarChar(100)
+  github_id     String         @unique @db.VarChar(100)
+  is_admin      Boolean        @default(false)
+  is_active     Boolean        @default(true)
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @default(now())
+  posts         Post[]
+  comments      Comment[]
+  likes         Like[]
+  notifications Notification[]
 }
 
 model Category {
@@ -32,31 +33,33 @@ model Category {
 }
 
 model Post {
-  id                String     @id @default(uuid())
-  title             String     @db.VarChar(128)
-  short_description String     @db.VarChar(256)
-  author            User       @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  id                String         @id @default(uuid())
+  title             String         @db.VarChar(128)
+  short_description String         @db.VarChar(256)
+  author            User           @relation(fields: [author_id], references: [id], onDelete: Cascade)
   author_id         String
-  content           String     @db.Text
-  visibility        Visibility @default(PUBLIC)
-  Category          Category   @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  content           String         @db.Text
+  visibility        Visibility     @default(PUBLIC)
+  Category          Category       @relation(fields: [category_id], references: [id], onDelete: Cascade)
   category_id       String
   comments          Comment[]
   likes             Like[]
-  created_at        DateTime   @default(now())
-  updated_at        DateTime   @default(now())
+  created_at        DateTime       @default(now())
+  updated_at        DateTime       @default(now())
+  notifications     Notification[]
 }
 
 model Comment {
-  id         String   @id @default(uuid())
-  author     User     @relation(fields: [author_id], references: [id])
-  author_id  String
-  post       Post     @relation(fields: [post_id], references: [id], onDelete: Cascade)
-  post_id    String
-  content    String
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-  approved   Boolean  @default(true)
+  id            String         @id @default(uuid())
+  author        User           @relation(fields: [author_id], references: [id])
+  author_id     String
+  post          Post           @relation(fields: [post_id], references: [id], onDelete: Cascade)
+  post_id       String
+  content       String
+  created_at    DateTime       @default(now())
+  updated_at    DateTime       @default(now())
+  approved      Boolean        @default(true)
+  notiofication Notification[]
 }
 
 model Like {
@@ -68,8 +71,26 @@ model Like {
   created_at DateTime @default(now())
 }
 
+model Notification {
+  id             String           @id @default(uuid())
+  type           NotificationType
+  user           User             @relation(fields: [user_id], references: [id])
+  user_id        String
+  target_user_id String
+  post           Post?            @relation(fields: [post_id], references: [id])
+  post_id        String?
+  comment        Comment?         @relation(fields: [comment_id], references: [id])
+  comment_id     String?
+}
+
 enum Visibility {
   PUBLIC
   PRIVATE
   UNLISTED
+}
+
+enum NotificationType {
+  LIKE
+  COMMENT
+  FOLLOW
 }
