@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="container mx-auto px-5 sm:px-7 md:px-10 py-3 sm:py-5 md:py-10  flex items-center">
       <BiMenu
-        onClick={() => toggle()}
+        onClick={toggle}
         className="text-3xl mr-3 cursor-pointer sm:hidden -mb-1 dark:text-zinc-300"
       />
       <Link href="/" passHref>

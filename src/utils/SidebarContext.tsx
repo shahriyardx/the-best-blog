@@ -3,14 +3,14 @@ import { Children } from "types/common";
 
 const SidebarContext = createContext({
   open: false,
-  toggle: (state?: boolean) => {},
+  toggle: () => {},
 });
 
 export const SidebarProvider = ({ children }: { children: Children }) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const toggle = (state?: boolean) => {
-    setOpen(typeof state === undefined ? !open : (state as boolean));
+  const toggle = () => {
+    setOpen(!open);
   };
 
   return (

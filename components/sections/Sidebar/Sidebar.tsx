@@ -10,7 +10,7 @@ type Props = {
 
 const Sidebar = ({ children }: Props) => {
   const { open, toggle } = useContext(SidebarContext);
-  Router.events.on("routeChangeComplete", () => toggle(false));
+  Router.events.on("routeChangeComplete", () => (open ? toggle() : {}));
 
   return (
     <div
