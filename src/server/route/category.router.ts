@@ -7,7 +7,15 @@ import { createRouter } from "../createRouter";
 export const categoryRouter = createRouter()
   .query("all", {
     async resolve({ ctx }) {
-      const allCategory = await ctx.prisma.category.findMany();
+      const allCategory = await ctx.prisma.category.findMany({
+        include: {
+          posts: {
+            select: {
+              id: true,
+            },
+          },
+        },
+      });
       return allCategory;
     },
   })

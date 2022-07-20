@@ -23,8 +23,9 @@ const SidebarLink = ({ href, children }: Props) => {
       <Link href={href} passHref>
         <a
           className={`
-          inline-flex items-center gap-2 underline decoration-dashed decoration-1
-          underline-offset-2 ${active && "font-bold text-blue-500"}`}
+          gap-2 hover:underline underline-offset-[3px] inline-block" ${
+            active && "font-bold text-blue-500 underline"
+          }`}
         >
           {children}
         </a>

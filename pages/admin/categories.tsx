@@ -40,7 +40,12 @@ const Categories: NextPage & { requireAdmin: boolean } = () => {
                 key={cat.id}
                 className="grid grid-cols-3 gap-5 dark:text-zinc-300 px-5 py-3"
               >
-                <div className="truncate">{cat.name}</div>
+                <div className="flex items-center gap-2">
+                  <span>{cat.name}</span>
+                  <span className="text-sm px-3 py-1 bg-zinc-600 rounded-full">
+                    {cat.posts?.length} posts
+                  </span>
+                </div>
                 <div>{cat.slug}</div>
                 <div className="flex gap-2 items-center flex-wrap">
                   {delId !== cat.id && (
