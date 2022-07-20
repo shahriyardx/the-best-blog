@@ -11,18 +11,19 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(uuid())
-  email         String         @unique @db.VarChar(255)
-  username      String         @unique @db.VarChar(100)
-  github_id     String         @unique @db.VarChar(100)
-  is_admin      Boolean        @default(false)
-  is_active     Boolean        @default(true)
-  created_at    DateTime       @default(now())
-  updated_at    DateTime       @default(now())
-  posts         Post[]
-  comments      Comment[]
-  likes         Like[]
-  notifications Notification[]
+  id                    String         @id @default(uuid())
+  email                 String         @unique @db.VarChar(255)
+  username              String         @unique @db.VarChar(100)
+  github_id             String         @unique @db.VarChar(100)
+  is_admin              Boolean        @default(false)
+  is_active             Boolean        @default(true)
+  created_at            DateTime       @default(now())
+  updated_at            DateTime       @default(now())
+  posts                 Post[]
+  comments              Comment[]
+  likes                 Like[]
+  notifications         Notification[] @relation(name: "myNotifications")
+  related_notifications Notification[] @relation(name: "relatedNotifications")
 }
 
 model Category {
@@ -51,7 +52,7 @@ model Post {
 
 model Comment {
   id            String         @id @default(uuid())
-  author        User           @relation(fields: [author_id], references: [id])
+  author        User           @relation(fields: [author_id], references: [id], onDelete: Cascade)
   author_id     String
   post          Post           @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id       String
@@ -59,7 +60,7 @@ model Comment {
   created_at    DateTime       @default(now())
   updated_at    DateTime       @default(now())
   approved      Boolean        @default(true)
-  notiofication Notification[]
+  notifications Notification[]
 }
 
 model Like {
@@ -74,12 +75,13 @@ model Like {
 model Notification {
   id             String           @id @default(uuid())
   type           NotificationType
-  user           User             @relation(fields: [user_id], references: [id])
+  user           User             @relation(name: "myNotifications", fields: [user_id], references: [id], onDelete: Cascade)
   user_id        String
+  target_user    User             @relation(name: "relatedNotifications", fields: [target_user_id], references: [id], onDelete: Cascade)
   target_user_id String
-  post           Post?            @relation(fields: [post_id], references: [id])
+  post           Post?            @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id        String?
-  comment        Comment?         @relation(fields: [comment_id], references: [id])
+  comment        Comment?         @relation(fields: [comment_id], references: [id], onDelete: Cascade)
   comment_id     String?
 }
 
