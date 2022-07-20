@@ -63,7 +63,7 @@ const Page = ({ children }: Props) => {
                 </button>
               ) : (
                 <>
-                  <SidebarLink href="/u/posts">My Posts</SidebarLink>
+                  <SidebarLink href="/u/posts">Profile</SidebarLink>
                   {session.profile.is_admin && session.profile.is_active && (
                     <SidebarLink href="/admin/">Admin</SidebarLink>
                   )}
