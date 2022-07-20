@@ -20,7 +20,13 @@ const Page = ({ children }: Props) => {
   return (
     <>
       <Header />
-      <div className="container mx-auto grid grid-cols-1 sm:grid-cols-sidebarLayout gap-5 px-5 sm:px-7 md:px-10 mt-3 sm:mt-5 md:mt-10">
+      <div
+        className="
+        container mx-auto grid grid-cols-1 
+        sm:grid-cols-sidebarLayout gap-5 px-5 
+        sm:px-7 md:px-10 mt-3 sm:mt-5 md:mt-10
+      "
+      >
         <Sidebar>
           <div className="flex flex-col gap-2">
             <SidebarLink href="/">Home</SidebarLink>
@@ -59,9 +65,9 @@ const Page = ({ children }: Props) => {
                 <button
                   onClick={() => signIn("github")}
                   className="
-                      flex items-center gap-2 underline decoration-dashed decoration-1
-                      underline-offset-2
-                    "
+                    flex items-center gap-2 underline decoration-dashed decoration-1
+                    underline-offset-2
+                  "
                 >
                   Login
                 </button>
@@ -74,9 +80,9 @@ const Page = ({ children }: Props) => {
                   <button
                     onClick={() => signOut()}
                     className="
-                        flex items-center gap-2 underline decoration-dashed decoration-1
-                        underline-offset-2 text-red-500
-                      "
+                      flex items-center gap-2 underline decoration-dashed 
+                      decoration-1 underline-offset-2 text-red-500
+                    "
                   >
                     <>Logout ({session.profile.username})</>
                   </button>
