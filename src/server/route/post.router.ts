@@ -115,6 +115,25 @@ export const postRouter = createRouter()
         data: { ...input, author_id: ctx.session?.profile.id as string },
       });
 
+      const post = await ctx.prisma.post.findUnique({
+        where: {
+          id: input.post_id,
+        },
+        select: {
+          id: true,
+          author_id: true,
+        },
+      });
+
+      await ctx.prisma.notification.create({
+        data: {
+          type: "COMMENT",
+          to_id: post?.author_id as string,
+          from_id: ctx.session?.profile.id as string,
+          post_id: post?.id as string,
+        },
+      });
+
       return comment;
     },
   })
