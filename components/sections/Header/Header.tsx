@@ -3,6 +3,7 @@ import ThemeToggle from "components/single/ThemeToggle/ThemeToggle";
 import { BiMenu } from "react-icons/bi";
 import Link from "next/link";
 import SidebarContext from "@utils/SidebarContext";
+import NotificatioButton from "components/single/NotificatioButton/NotificatioButton";
 
 const Header = () => {
   const { toggle } = useContext(SidebarContext);
@@ -24,7 +25,10 @@ const Header = () => {
         </a>
       </Link>
 
-      <ThemeToggle />
+      <div className="flex items-center gap-2 ml-auto">
+        <NotificatioButton />
+        <ThemeToggle />
+      </div>
     </header>
   );
 };

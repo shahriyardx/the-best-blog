@@ -9,8 +9,8 @@ const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       className="
-          cursor-pointer p-3 rounded-full text-xl 
-          ml-auto bg-zinc-700 text-white outline-none 
+          cursor-pointer p-3 rounded-full text-lg 
+         bg-zinc-700 text-white outline-none 
           focus:outline-2 focus:outline-blue-500
         "
     >
