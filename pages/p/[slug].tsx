@@ -29,12 +29,15 @@ interface Props {
 
 const SinglePost: NextPage<Props> = ({ post }) => {
   const [showCommentForm, setShowCommentForm] = useState<boolean>(false);
-  const { data: latestPost, refetch } = trpc.useQuery([
-    "posts.byId",
-    {
-      post_id: post.id,
-    },
-  ]);
+  const { data: latestPost, refetch } = trpc.useQuery(
+    [
+      "posts.byId",
+      {
+        post_id: post.id,
+      },
+    ],
+    { refetchOnWindowFocus: false }
+  );
 
   return (
     <Page>
@@ -132,7 +135,7 @@ export const getStaticProps = async (
     return {
       props: {
         post: modifiedPost,
-      }
+      },
     };
   } catch (error) {
     return {

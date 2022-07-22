@@ -3,6 +3,7 @@ import React, { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { trpc } from "@utils/trpc";
 import { CommentInput } from "@schema/comment.schema";
+import toast from "react-hot-toast";
 type Props = {
   post_id: string;
   refetch: () => void;
@@ -18,9 +19,15 @@ const CommentForm = ({ post_id, setShowCommentForm, refetch }: Props) => {
     onSuccess: () => {
       refetch();
       reset();
+      setCommenting(false);
+    },
+    onError: (error) => {
+      toast.error(error.message);
+      setCommenting(false);
     },
   });
   const createComment = async (data: CommentInput) => {
+    setCommenting(true);
     addComment({ ...data, post_id });
   };
   return (
