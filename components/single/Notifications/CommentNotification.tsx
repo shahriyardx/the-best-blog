@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { Notification, User } from "@prisma/client";
 import { BiCommentDetail } from "react-icons/bi";
 
 type Props = {
-  active: boolean;
+  notification: Notification & { from: Pick<User, "username"> };
 };
 
-const CommentNotification = ({ active }: Props) => {
+const CommentNotification = ({ notification }: Props) => {
   const fakeData = {
     user: {
       username: "test",
@@ -22,15 +23,14 @@ const CommentNotification = ({ active }: Props) => {
         <BiCommentDetail />
       </div>
       <div className="text-zinc-300 text-xs">
-        <p>
-          <span className="font-semibold text-white">
-            {fakeData.user.username}&nbsp;
-          </span>
-          <span>commented on your post&nbsp;</span>
-          <Link href="/" passHref>
-            <a className="font-semibold text-blue-400">{fakeData.post.title}</a>
-          </Link>
-        </p>
+        <Link href={`/p/${notification.post_id}`}>
+          <a>
+            <span className="font-semibold text-white">
+              {notification.from.username}&nbsp;
+            </span>
+            <span>commented your post</span>
+          </a>
+        </Link>
       </div>
     </div>
   );

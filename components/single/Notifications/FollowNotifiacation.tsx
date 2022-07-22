@@ -1,11 +1,11 @@
-import Link from "next/link";
+import { Notification, User } from "@prisma/client";
 import { BiUserPlus } from "react-icons/bi";
 
 type Props = {
-  active: boolean;
+  notification: Notification & { from: Pick<User, "username"> };
 };
 
-const FollowNotification = ({ active }: Props) => {
+const FollowNotification = ({ notification }: Props) => {
   const fakeData = {
     user: {
       username: "test",

@@ -1,11 +1,12 @@
+import { Notification, User } from "@prisma/client";
 import Link from "next/link";
 import { BiLike } from "react-icons/bi";
 
 type Props = {
-  active: boolean;
+  notification: Notification & { from: Pick<User, "username"> };
 };
 
-const LikeNotification = ({ active }: Props) => {
+const LikeNotification = ({ notification }: Props) => {
   const fakeData = {
     user: {
       username: "test",
@@ -24,17 +25,14 @@ const LikeNotification = ({ active }: Props) => {
         <BiLike />
       </div>
       <div className="text-zinc-300 text-xs">
-        <p>
-          <span className="font-semibold text-white">
-            {fakeData.user.username}&nbsp;
-          </span>
-          <span>liked your post&nbsp;</span>
-          <Link href="/" passHref>
-            <a className="font-semibold text-blue-400">
-              {fakeData.post.title.slice(0, 15)}...
-            </a>
-          </Link>
-        </p>
+        <Link href={`/p/${notification.post_id}`}>
+          <a>
+            <span className="font-semibold text-white">
+              {notification.from.username}&nbsp;
+            </span>
+            <span>liked your post&nbsp;</span>
+          </a>
+        </Link>
       </div>
     </div>
   );
