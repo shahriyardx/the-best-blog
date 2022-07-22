@@ -8,7 +8,9 @@ import Link from "next/link";
 import { trpc } from "@utils/trpc";
 
 const NotificatioButton = () => {
-  const { data: notifications } = trpc.useQuery(["user.myNotifications"]);
+  const { data: notifications } = trpc.useQuery(["user.myNotifications"], {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <Menu as="div" className="relative">
@@ -23,9 +25,13 @@ const NotificatioButton = () => {
         ) : null}
       </Menu.Button>
       <Menu.Items className="absolute top-12 right-0 w-60 sm:w-80 flex flex-col gap-3 z-10 bg-zinc-800 p-3 rounded-md border-[1px] border-zinc-600">
+        {!notifications ||
+          (!notifications.length && (
+            <p className="p-3 text-center text-red-300">No new notifications</p>
+          ))}
         {notifications?.slice(0, 2).map((notification) => {
           return (
-            <Menu.Item>
+            <Menu.Item key={notification.id}>
               {notification.type === "LIKE" ? (
                 <LikeNotification notification={notification} />
               ) : notification.type === "COMMENT" ? (
@@ -36,11 +42,13 @@ const NotificatioButton = () => {
             </Menu.Item>
           );
         })}
-        <Link href="/u/notifications">
-          <a className="text-center text-white rounded-md text-xs hover:text-blue-400">
-            See All
-          </a>
-        </Link>
+        {notifications && notifications.length > 0 && (
+          <Link href="/u/notifications">
+            <a className="text-center text-white rounded-md text-xs hover:text-blue-400">
+              See All
+            </a>
+          </Link>
+        )}
       </Menu.Items>
     </Menu>
   );

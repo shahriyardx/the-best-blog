@@ -4,21 +4,16 @@ import { BiCommentDetail } from "react-icons/bi";
 
 type Props = {
   notification: Notification & { from: Pick<User, "username"> };
+  border?: boolean;
 };
 
-const CommentNotification = ({ notification }: Props) => {
-  const fakeData = {
-    user: {
-      username: "test",
-    },
-    post: {
-      id: "111",
-      title: "Some post",
-    },
-  };
-
+const CommentNotification = ({ notification, border }: Props) => {
   return (
-    <div className="bg-zinc-700 hover:bg-zinc-600 p-3 rounded-md flex items-center gap-3 cursor-pointer">
+    <div
+      className={`bg-zinc-700 hover:bg-zinc-600 p-3 rounded-md flex items-center gap-3 cursor-pointer ${
+        border && "border-2 border-zinc-500"
+      }`}
+    >
       <div className="p-2 h-full aspect-square bg-zinc-500 text-white text-sm rounded-md">
         <BiCommentDetail />
       </div>

@@ -20,6 +20,7 @@ const ProfilePage = ({ children }: Props) => {
       >
         <Sidebar>
           <div className="flex flex-col gap-2">
+            <SidebarLink href="/u/notifications">Notifications</SidebarLink>
             <SidebarLink href="/u/posts">Posts</SidebarLink>
             <SidebarLink href="/u/posts/create">New Post</SidebarLink>
           </div>

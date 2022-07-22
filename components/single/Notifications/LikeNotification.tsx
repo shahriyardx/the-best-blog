@@ -4,19 +4,10 @@ import { BiLike } from "react-icons/bi";
 
 type Props = {
   notification: Notification & { from: Pick<User, "username"> };
+  border?: boolean;
 };
 
 const LikeNotification = ({ notification }: Props) => {
-  const fakeData = {
-    user: {
-      username: "test",
-    },
-    post: {
-      id: "111",
-      title: "Some post that is soo big and big big big in future too",
-    },
-  };
-
   return (
     <div
       className={`bg-zinc-700 hover:bg-zinc-600 p-3 rounded-md flex items-center gap-3 cursor-pointer`}

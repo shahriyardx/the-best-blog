@@ -3,6 +3,7 @@ import { BiUserPlus } from "react-icons/bi";
 
 type Props = {
   notification: Notification & { from: Pick<User, "username"> };
+  border?: boolean;
 };
 
 const FollowNotification = ({ notification }: Props) => {

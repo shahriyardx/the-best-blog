@@ -81,4 +81,25 @@ export const userRouter = createRouter()
 
       return notifications;
     },
+  })
+  .query("myNotificationsAll", {
+    async resolve({ ctx }) {
+      const notifications = await ctx.prisma.notification.findMany({
+        where: {
+          to_id: ctx.session?.profile.id,
+        },
+        include: {
+          from: {
+            select: {
+              username: true,
+            },
+          },
+        },
+        orderBy: {
+          status: "desc",
+        },
+      });
+
+      return notifications;
+    },
   });
