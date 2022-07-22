@@ -111,10 +111,6 @@ export const postRouter = createRouter()
   .mutation("addComment", {
     input: CommentSchema,
     async resolve({ ctx, input }) {
-      const comment = await ctx.prisma.comment.create({
-        data: { ...input, author_id: ctx.session?.profile.id as string },
-      });
-
       const post = await ctx.prisma.post.findUnique({
         where: {
           id: input.post_id,
@@ -125,12 +121,23 @@ export const postRouter = createRouter()
         },
       });
 
+      if (!post) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Post not found",
+        });
+      }
+
+      const comment = await ctx.prisma.comment.create({
+        data: { ...input, author_id: ctx.session?.profile.id as string },
+      });
+
       await ctx.prisma.notification.create({
         data: {
           type: "COMMENT",
-          to_id: post?.author_id as string,
+          to_id: post.author_id,
           from_id: ctx.session?.profile.id as string,
-          post_id: post?.id as string,
+          post_id: post.id,
         },
       });
 
@@ -155,14 +162,37 @@ export const postRouter = createRouter()
             id: liked.id,
           },
         });
-      } else {
-        await ctx.prisma.like.create({
-          data: {
-            post_id: input.post_id,
-            user_id: ctx.session?.profile.id as string,
-          },
+
+        return { success: true };
+      }
+      await ctx.prisma.like.create({
+        data: {
+          post_id: input.post_id,
+          user_id: ctx.session?.profile.id as string,
+        },
+      });
+
+      const post = await ctx.prisma.post.findUnique({
+        where: {
+          id: input.post_id,
+        },
+      });
+
+      if (!post || !ctx.session?.profile) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Something went wrong",
         });
       }
+
+      await ctx.prisma.notification.create({
+        data: {
+          type: "LIKE",
+          from_id: ctx.session.profile.id,
+          to_id: post.author_id,
+          post_id: post.id,
+        },
+      });
 
       return { success: true };
     },

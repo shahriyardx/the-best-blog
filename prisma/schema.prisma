@@ -34,20 +34,19 @@ model Category {
 }
 
 model Post {
-  id                String         @id @default(uuid())
-  title             String         @db.VarChar(128)
-  short_description String         @db.VarChar(256)
-  author            User           @relation(fields: [author_id], references: [id], onDelete: Cascade)
+  id                String     @id @default(uuid())
+  title             String     @db.VarChar(128)
+  short_description String     @db.VarChar(256)
+  author            User       @relation(fields: [author_id], references: [id], onDelete: Cascade)
   author_id         String
-  content           String         @db.Text
-  visibility        Visibility     @default(PUBLIC)
-  Category          Category       @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  content           String     @db.Text
+  visibility        Visibility @default(PUBLIC)
+  Category          Category   @relation(fields: [category_id], references: [id], onDelete: Cascade)
   category_id       String
   comments          Comment[]
   likes             Like[]
-  created_at        DateTime       @default(now())
-  updated_at        DateTime       @default(now())
-  notifications     Notification[]
+  created_at        DateTime   @default(now())
+  updated_at        DateTime   @default(now())
 }
 
 model Comment {
@@ -72,16 +71,15 @@ model Like {
 }
 
 model Notification {
-  id         String           @id @default(uuid())
+  id         String             @id @default(uuid())
   type       NotificationType
-  from       User             @relation(name: "relatedNotifications", fields: [from_id], references: [id], onDelete: Cascade)
+  status     NotificationStatus @default(UNREAD)
+  from       User               @relation(name: "relatedNotifications", fields: [from_id], references: [id], onDelete: Cascade)
   from_id    String
-  to         User             @relation(name: "myNotifications", fields: [to_id], references: [id], onDelete: Cascade)
+  to         User               @relation(name: "myNotifications", fields: [to_id], references: [id], onDelete: Cascade)
   to_id      String
-  post       Post?            @relation(fields: [post_id], references: [id], onDelete: Cascade)
   post_id    String?
-  created_at DateTime         @default(now())
-  updated_at DateTime         @default(now())
+  created_at DateTime           @default(now())
 }
 
 enum Visibility {
@@ -94,4 +92,9 @@ enum NotificationType {
   LIKE
   COMMENT
   FOLLOW
+}
+
+enum NotificationStatus {
+  READ
+  UNREAD
 }
