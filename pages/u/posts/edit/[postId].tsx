@@ -12,9 +12,12 @@ const EditPost = () => {
   const router = useRouter();
   const postId = router.query.postId as string;
   const [value, setValue] = useState<string>("");
-  const { data: categories, isLoading: catLoading } = trpc.useQuery([
-    "category.all",
-  ]);
+  const { data: categories, isLoading: catLoading } = trpc.useQuery(
+    ["category.all"],
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
   const { data: post, isLoading: postLoading } = trpc.useQuery(
     ["user.postById", { post_id: postId }],
     { refetchOnWindowFocus: false }

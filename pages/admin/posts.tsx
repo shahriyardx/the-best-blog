@@ -6,7 +6,9 @@ import toast from "react-hot-toast";
 
 const Posts: NextPage & { requireAdmin: boolean } = () => {
   const [deleteId, setDeleteId] = useState<string>();
-  const { data: posts, refetch } = trpc.useQuery(["admin.posts"]);
+  const { data: posts, refetch } = trpc.useQuery(["admin.posts"], {
+    refetchOnWindowFocus: false,
+  });
   const { mutate: deletePostById } = trpc.useMutation(
     ["admin.deletePostById"],
     {

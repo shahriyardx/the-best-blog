@@ -16,7 +16,9 @@ const CreatePost: NextPage & { requireAuth: boolean } = () => {
     reset,
     formState: { errors },
   } = useForm<PostInput>();
-  const { data: categories } = trpc.useQuery(["category.all"]);
+  const { data: categories } = trpc.useQuery(["category.all"], {
+    refetchOnWindowFocus: false,
+  });
   const { mutate } = trpc.useMutation(["posts.create"], {
     onSuccess: () => {
       reset();

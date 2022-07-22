@@ -10,7 +10,9 @@ import BlogLoading from "components/single/BlogLoading/BlogLoading";
 
 const CategoryPosts: NextPage = () => {
   const router = useRouter();
-  const { data: categories, isLoading } = trpc.useQuery(["category.all"]);
+  const { data: categories, isLoading } = trpc.useQuery(["category.all"], {
+    refetchOnWindowFocus: false,
+  });
 
   if (isLoading) {
     return <Page>Loading...</Page>;

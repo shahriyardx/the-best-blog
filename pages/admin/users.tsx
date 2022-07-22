@@ -6,7 +6,9 @@ import toast from "react-hot-toast";
 
 const DashboardUsers: NextPage & { requireAdmin: boolean } = () => {
   const [deleteId, setDeleteId] = useState<string>();
-  const { data: users, refetch } = trpc.useQuery(["admin.allUsers"]);
+  const { data: users, refetch } = trpc.useQuery(["admin.allUsers"], {
+    refetchOnWindowFocus: false,
+  });
 
   const { mutate: deleteUserById } = trpc.useMutation(
     ["admin.deleteUserById"],

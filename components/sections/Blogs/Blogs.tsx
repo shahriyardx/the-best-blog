@@ -14,7 +14,9 @@ type Props = {
 const Blogs = ({ category }: Props) => {
   const router = useRouter();
 
-  const { data: posts, isLoading } = trpc.useQuery(["posts.all"]);
+  const { data: posts, isLoading } = trpc.useQuery(["posts.all"], {
+    refetchOnWindowFocus: false,
+  });
 
   if (isLoading) {
     return <BlogLoading />;

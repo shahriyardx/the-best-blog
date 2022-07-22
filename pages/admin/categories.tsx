@@ -6,7 +6,9 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 const Categories: NextPage & { requireAdmin: boolean } = () => {
-  const { data: categories, refetch } = trpc.useQuery(["category.all"]);
+  const { data: categories, refetch } = trpc.useQuery(["category.all"], {
+    refetchOnWindowFocus: false,
+  });
   const [delId, setDelId] = useState<string>();
   const { mutate } = trpc.useMutation(["category.deleteById"], {
     onError: (error) => {

@@ -3,7 +3,9 @@ import { trpc } from "@utils/trpc";
 import ProfilePost from "components/single/ProfilePost/ProfilePost";
 
 const ProfilePosts = () => {
-  const { data: posts, refetch } = trpc.useQuery(["user.posts"]);
+  const { data: posts, refetch } = trpc.useQuery(["user.posts"], {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <section className="container mx-auto">
