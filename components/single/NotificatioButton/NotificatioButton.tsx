@@ -5,12 +5,11 @@ import LikeNotification from "../Notifications/LikeNotification";
 import CommentNotification from "../Notifications/CommentNotification";
 import FollowNotification from "../Notifications/FollowNotifiacation";
 import Link from "next/link";
-import { trpc } from "@utils/trpc";
+import useNotifications from "hooks/useNotifications";
+import Notification from "../Notifications/Notifications";
 
 const NotificatioButton = () => {
-  const { data: notifications } = trpc.useQuery(["user.myNotifications"], {
-    refetchOnWindowFocus: false,
-  });
+  const { notifications } = useNotifications();
 
   return (
     <Menu as="div" className="relative">
@@ -32,13 +31,7 @@ const NotificatioButton = () => {
         {notifications?.slice(0, 2).map((notification) => {
           return (
             <Menu.Item key={notification.id}>
-              {notification.type === "LIKE" ? (
-                <LikeNotification notification={notification} />
-              ) : notification.type === "COMMENT" ? (
-                <CommentNotification notification={notification} />
-              ) : notification.type === "FOLLOW" ? (
-                <FollowNotification notification={notification} />
-              ) : null}
+              <Notification notification={notification} />
             </Menu.Item>
           );
         })}

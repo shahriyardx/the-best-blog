@@ -2,25 +2,16 @@ import React from "react";
 import { NextPage } from "next";
 import ProfilePage from "components/Layouts/ProfilePage";
 import SEO from "components/single/SEO";
-import { trpc } from "@utils/trpc";
-import LikeNotification from "components/single/Notifications/LikeNotification";
-import CommentNotification from "components/single/Notifications/CommentNotification";
-import FollowNotification from "components/single/Notifications/FollowNotifiacation";
 import { useSession } from "next-auth/react";
+import useNotifications from "hooks/useNotifications";
+import Notification from "components/single/Notifications/Notifications";
 
 const Posts: NextPage & { requireAuth: boolean } = () => {
   const { data: session } = useSession();
-  const { data: notifications, refetch } = trpc.useQuery(
-    ["user.myNotificationsAll"],
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-  const { mutate: markRead } = trpc.useMutation(["notification.markRead"]);
+  const { notifications, markRead } = useNotifications();
 
   const markAllRead = () => {
     markRead({ to_id: session?.profile.id as string });
-    refetch();
   };
 
   return (
@@ -37,25 +28,13 @@ const Posts: NextPage & { requireAuth: boolean } = () => {
       </div>
       <div className="flex flex-col gap-5">
         {notifications?.map((notification) => {
-          return notification.type === "LIKE" ? (
-            <LikeNotification
+          return (
+            <Notification
               key={notification.id}
               border={notification.status === "UNREAD"}
               notification={notification}
             />
-          ) : notification.type === "COMMENT" ? (
-            <CommentNotification
-              key={notification.id}
-              border={notification.status === "UNREAD"}
-              notification={notification}
-            />
-          ) : notification.type === "FOLLOW" ? (
-            <FollowNotification
-              key={notification.id}
-              border={notification.status === "UNREAD"}
-              notification={notification}
-            />
-          ) : null;
+          );
         })}
       </div>
     </ProfilePage>
