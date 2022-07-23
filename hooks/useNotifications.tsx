@@ -9,7 +9,7 @@ const useNotifications = () => {
   );
 
   const { data: allnotifications, refetch: refetchAll } = trpc.useQuery(
-    ["user.myNotifications"],
+    ["user.myNotificationsAll"],
     {
       refetchOnWindowFocus: false,
     }
