@@ -132,14 +132,16 @@ export const postRouter = createRouter()
         data: { ...input, author_id: ctx.session?.profile.id as string },
       });
 
-      await ctx.prisma.notification.create({
-        data: {
-          type: "COMMENT",
-          to_id: post.author_id,
-          from_id: ctx.session?.profile.id as string,
-          post_id: post.id,
-        },
-      });
+      if (post.author_id !== ctx.session?.profile.id) {
+        await ctx.prisma.notification.create({
+          data: {
+            type: "COMMENT",
+            to_id: post.author_id,
+            from_id: ctx.session?.profile.id as string,
+            post_id: post.id,
+          },
+        });
+      }
 
       return comment;
     },
@@ -185,14 +187,16 @@ export const postRouter = createRouter()
         });
       }
 
-      await ctx.prisma.notification.create({
-        data: {
-          type: "LIKE",
-          from_id: ctx.session.profile.id,
-          to_id: post.author_id,
-          post_id: post.id,
-        },
-      });
+      if (post.author_id !== ctx.session?.profile.id) {
+        await ctx.prisma.notification.create({
+          data: {
+            type: "LIKE",
+            from_id: ctx.session.profile.id,
+            to_id: post.author_id,
+            post_id: post.id,
+          },
+        });
+      }
 
       return { success: true };
     },
