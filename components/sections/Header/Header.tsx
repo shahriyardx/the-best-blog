@@ -4,8 +4,10 @@ import { BiMenu } from "react-icons/bi";
 import Link from "next/link";
 import SidebarContext from "@utils/SidebarContext";
 import NotificatioButton from "components/single/NotificatioButton/NotificatioButton";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
+  const { status } = useSession()
   const { toggle } = useContext(SidebarContext);
 
   return (
@@ -26,7 +28,7 @@ const Header = () => {
       </Link>
 
       <div className="flex items-center gap-2 ml-auto">
-        <NotificatioButton />
+        {status === "authenticated" && <NotificatioButton />}
         <ThemeToggle />
       </div>
     </header>
