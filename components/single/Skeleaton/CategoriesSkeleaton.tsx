@@ -1,16 +1,45 @@
 const CategoriesSkeleaton = () => {
   return (
     <>
-      {[...Array(5)].map((_, index) => (
-        <div
-          key={index}
-          className="h-4 bg-zinc-700 animate-pulse"
-          style={{
-            width: "100%",
-            maxWidth: `${Math.floor(Math.random() * 20 + 50)}px`,
-          }}
-        />
-      ))}
+      <div
+        className="h-4 bg-zinc-700 animate-pulse"
+        style={{
+          width: "100%",
+          maxWidth: `45px`,
+        }}
+      />
+
+      <div
+        className="h-4 bg-zinc-700 animate-pulse"
+        style={{
+          width: "100%",
+          maxWidth: `50px`,
+        }}
+      />
+
+      <div
+        className="h-4 bg-zinc-700 animate-pulse"
+        style={{
+          width: "100%",
+          maxWidth: `35px`,
+        }}
+      />
+
+      <div
+        className="h-4 bg-zinc-700 animate-pulse"
+        style={{
+          width: "100%",
+          maxWidth: `40px`,
+        }}
+      />
+
+      <div
+        className="h-4 bg-zinc-700 animate-pulse"
+        style={{
+          width: "100%",
+          maxWidth: `30px`,
+        }}
+      />
     </>
   );
 };

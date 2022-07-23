@@ -7,12 +7,12 @@ const BlogCardSkeleaton = () => {
         className="p-2 rounded-md bg-zinc-400 dark:bg-zinc-800"
         style={{
           width: "100%",
-          maxWidth: Math.floor(Math.random() * 100 + 300),
+          maxWidth: "300px",
         }}
       />
       <div
         className="bg-zinc-300 dark:bg-zinc-700 rounded-md mt-3 w-24 p-2"
-        style={{ width: Math.floor(Math.random() * 20 + 80) }}
+        style={{ width: "80px" }}
       />
 
       <div></div>

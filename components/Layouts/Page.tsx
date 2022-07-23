@@ -3,8 +3,9 @@ import Header from "components/sections/Header/Header";
 import Sidebar from "components/sections/Sidebar/Sidebar";
 import { signIn, signOut, useSession } from "next-auth/react";
 import React, { useState } from "react";
-import { trpc } from "@utils/trpc";
 import CategoriesSkeleaton from "components/single/Skeleaton/CategoriesSkeleaton";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/store";
 
 type Props = {
   children: React.ReactNode | React.ReactNode[];
@@ -13,9 +14,9 @@ type Props = {
 const Page = ({ children }: Props) => {
   const { data: session, status } = useSession();
   const [allcat, setAllCat] = useState<boolean>(false);
-  const { data: categories, isLoading } = trpc.useQuery(["category.all"], {
-    refetchOnWindowFocus: false,
-  });
+  const { value: categories, isLoading } = useSelector(
+    (state: RootState) => state.categories
+  );
 
   return (
     <>

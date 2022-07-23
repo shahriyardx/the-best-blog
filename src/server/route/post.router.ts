@@ -90,7 +90,6 @@ export const postRouter = createRouter()
   })
   .middleware(async ({ ctx, next }) => {
     if (!ctx.session) {
-      console.log("Session");
       throw new TRPCError({
         code: "UNAUTHORIZED",
         message: "You are not logged in",
