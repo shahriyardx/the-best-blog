@@ -8,6 +8,7 @@ import {
   AiOutlineLoading3Quarters,
 } from "react-icons/ai";
 import { trpc } from "@utils/trpc";
+import toast from "react-hot-toast";
 
 interface Props {
   post_id: string;
@@ -26,7 +27,8 @@ const LikesAndComments = ({ likes, comments, refetch, post_id }: Props) => {
       refetch();
       setLiking(false);
     },
-    onError: () => {
+    onError: (error) => {
+      toast.error(error.message)
       setLiking(false);
     },
   });
@@ -45,6 +47,7 @@ const LikesAndComments = ({ likes, comments, refetch, post_id }: Props) => {
     : AiOutlineHeart;
 
   const addLike = async () => {
+    if (!session) return toast.error("Please login to like post")
     setLiking(true);
     likePost({ post_id });
   };

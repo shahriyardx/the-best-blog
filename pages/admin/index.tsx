@@ -4,7 +4,7 @@ import { NextPage } from "next";
 const Dashboard: NextPage & { requireAdmin: boolean } = () => {
   return (
     <AdminPage>
-      <span>WTF</span>
+      <span>Work in progress</span>
     </AdminPage>
   );
 };
