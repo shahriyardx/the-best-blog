@@ -22,6 +22,7 @@ const CreatePost: NextPage & { requireAuth: boolean } = () => {
   const { mutate } = trpc.useMutation(["posts.create"], {
     onSuccess: () => {
       reset();
+      setValue("")
       toast.success("Post created");
     },
     onError: (error) => {
