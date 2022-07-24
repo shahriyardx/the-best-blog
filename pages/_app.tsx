@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { trpc } from "@utils/trpc";
 import { setCategories } from "src/redux/category.slice";
 import { useEffect } from "react";
+import NextProgress from "next-progress";
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & {
@@ -52,6 +53,7 @@ const TheBest = ({
           <Component {...pageProps} />
         )}
         <Toaster />
+        <NextProgress />
       </SidebarProvider>
     </SessionProvider>
   );

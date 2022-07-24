@@ -27,6 +27,7 @@ specifiers:
   moment: ^2.29.4
   next: 12.2.2
   next-auth: ^4.10.0
+  next-progress: ^2.2.0
   next-redux-wrapper: ^7.0.5
   postcss: ^8.4.14
   prisma: ^4.1.0
@@ -64,6 +65,7 @@ dependencies:
   moment: 2.29.4
   next: 12.2.2_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.10.0_biqbaboplfbrettd7655fr4n2y
+  next-progress: 2.2.0_next@12.2.2+react@18.2.0
   next-redux-wrapper: 7.0.5_tsuhvv4n3lfp53i3ebuxwlcwlq
   prisma: 4.1.0
   react: 18.2.0
@@ -2018,6 +2020,17 @@ packages:
       uuid: 8.3.2
     dev: false
 
+  /next-progress/2.2.0_next@12.2.2+react@18.2.0:
+    resolution: {integrity: sha512-g6VBoaj2SfUhKiBSJW/7ju06Ks3r3mUK79HdrLJ7fmvnjeyHPViAKLQDsMN1QIoBcTqN1hR7A8sISiMfm01qmQ==}
+    peerDependencies:
+      next: '>=6.0.0'
+      react: '>=16.0.0'
+    dependencies:
+      next: 12.2.2_biqbaboplfbrettd7655fr4n2y
+      nprogress: 0.2.0
+      react: 18.2.0
+    dev: false
+
   /next-redux-wrapper/7.0.5_tsuhvv4n3lfp53i3ebuxwlcwlq:
     resolution: {integrity: sha512-UFXdAWG5i+GFT8+Hoqpx3GArkPh34fVWF9YoA2VSHlBzsrPtnRd7NWM6FNSYUennpommTpWJ09mu+r/1UxyIkg==}
     peerDependencies:
@@ -2087,6 +2100,10 @@ packages:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
+    dev: false
 
   /oauth/0.9.15:
     resolution: {integrity: sha512-a5ERWK1kh38ExDEfoO6qUHJb32rd7aYmPHuyCu3Fta/cnICvYmgd2uhuKXvPD+PXB+gCEYYEaQdIRAjCOwAKNA==}
