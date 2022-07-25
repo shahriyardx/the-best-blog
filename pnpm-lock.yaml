@@ -3,7 +3,6 @@ lockfileVersion: 5.4
 specifiers:
   '@headlessui/react': ^1.6.6
   '@prisma/client': 4.1.0
-  '@reduxjs/toolkit': ^1.8.3
   '@tailwindcss/forms': ^0.5.2
   '@tailwindcss/typography': ^0.5.4
   '@trpc/client': ^9.26.0
@@ -28,7 +27,6 @@ specifiers:
   next: 12.2.2
   next-auth: ^4.10.0
   next-progress: ^2.2.0
-  next-redux-wrapper: ^7.0.5
   postcss: ^8.4.14
   prisma: ^4.1.0
   react: 18.2.0
@@ -38,7 +36,6 @@ specifiers:
   react-icons: ^4.4.0
   react-lowlight: ^3.0.0
   react-query: ^3.39.2
-  react-redux: ^8.0.2
   slugify: ^1.6.5
   superjson: ^1.9.1
   tailwindcss: ^3.1.6
@@ -49,7 +46,6 @@ specifiers:
 dependencies:
   '@headlessui/react': 1.6.6_biqbaboplfbrettd7655fr4n2y
   '@prisma/client': 4.1.0_prisma@4.1.0
-  '@reduxjs/toolkit': 1.8.3_kkwg4cbsojnjnupd3btipussee
   '@tailwindcss/forms': 0.5.2_tailwindcss@3.1.6
   '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.6
   '@trpc/client': 9.26.2_@trpc+server@9.26.2
@@ -66,7 +62,6 @@ dependencies:
   next: 12.2.2_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.10.0_biqbaboplfbrettd7655fr4n2y
   next-progress: 2.2.0_next@12.2.2+react@18.2.0
-  next-redux-wrapper: 7.0.5_tsuhvv4n3lfp53i3ebuxwlcwlq
   prisma: 4.1.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -75,7 +70,6 @@ dependencies:
   react-icons: 4.4.0_react@18.2.0
   react-lowlight: 3.0.0_react@18.2.0
   react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
-  react-redux: 8.0.2_v7vsrdtui4d36prbwvdnlb7tpq
   slugify: 1.6.5
   superjson: 1.9.1
   textarea-markdown-editor: 1.0.1_biqbaboplfbrettd7655fr4n2y
@@ -385,25 +379,6 @@ packages:
     requiresBuild: true
     dev: false
 
-  /@reduxjs/toolkit/1.8.3_kkwg4cbsojnjnupd3btipussee:
-    resolution: {integrity: sha512-lU/LDIfORmjBbyDLaqFN2JB9YmAT1BElET9y0ZszwhSBa5Ef3t6o5CrHupw5J1iOXwd+o92QfQZ8OJpwXvsssg==}
-    peerDependencies:
-      react: ^16.9.0 || ^17.0.0 || ^18
-      react-redux: ^7.2.1 || ^8.0.2
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-redux:
-        optional: true
-    dependencies:
-      immer: 9.0.15
-      react: 18.2.0
-      react-redux: 8.0.2_v7vsrdtui4d36prbwvdnlb7tpq
-      redux: 4.2.0
-      redux-thunk: 2.4.1_redux@4.2.0
-      reselect: 4.1.6
-    dev: false
-
   /@rushstack/eslint-patch/1.1.4:
     resolution: {integrity: sha512-LwzQKA4vzIct1zNZzBmRKI9QuNpLgTQMEjsQLf3BXuGYb3QPTP4Yjf6mkdX+X1mYttZ808QpOwAzZjv28kq7DA==}
     dev: true
@@ -496,13 +471,6 @@ packages:
       '@types/unist': 2.0.6
     dev: false
 
-  /@types/hoist-non-react-statics/3.3.1:
-    resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
-    dependencies:
-      '@types/react': 18.0.15
-      hoist-non-react-statics: 3.3.2
-    dev: false
-
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
@@ -519,11 +487,13 @@ packages:
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
+    dev: true
 
   /@types/react-dom/18.0.6:
     resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
     dependencies:
       '@types/react': 18.0.15
+    dev: true
 
   /@types/react/18.0.15:
     resolution: {integrity: sha512-iz3BtLuIYH1uWdsv6wXYdhozhqj20oD4/Hk2DNXIn1kFsmp9x8d9QB6FnPhfkbhd2PgEONt9Q1x/ebkwjfFLow==}
@@ -531,16 +501,14 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
       csstype: 3.1.0
+    dev: true
 
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
+    dev: true
 
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
-    dev: false
-
-  /@types/use-sync-external-store/0.0.3:
-    resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
     dev: false
 
   /@typescript-eslint/parser/5.30.7_he2ccbldppg44uulnyq4rwocfa:
@@ -1565,20 +1533,10 @@ packages:
     engines: {node: '>=12.0.0'}
     dev: false
 
-  /hoist-non-react-statics/3.3.2:
-    resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
-    dependencies:
-      react-is: 16.13.1
-    dev: false
-
   /ignore/5.2.0:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
     engines: {node: '>= 4'}
     dev: true
-
-  /immer/9.0.15:
-    resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
-    dev: false
 
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -2031,18 +1989,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /next-redux-wrapper/7.0.5_tsuhvv4n3lfp53i3ebuxwlcwlq:
-    resolution: {integrity: sha512-UFXdAWG5i+GFT8+Hoqpx3GArkPh34fVWF9YoA2VSHlBzsrPtnRd7NWM6FNSYUennpommTpWJ09mu+r/1UxyIkg==}
-    peerDependencies:
-      next: '>=10.0.3'
-      react: '*'
-      react-redux: '*'
-    dependencies:
-      next: 12.2.2_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-redux: 8.0.2_v7vsrdtui4d36prbwvdnlb7tpq
-    dev: false
-
   /next/12.2.2_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-zAYFY45aBry/PlKONqtlloRFqU/We3zWYdn2NoGvDZkoYUYQSJC8WMcalS5C19MxbCZLUVCX7D7a6gTGgl2yLg==}
     engines: {node: '>=12.22.0'}
@@ -2446,10 +2392,7 @@ packages:
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-
-  /react-is/18.2.0:
-    resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
-    dev: false
+    dev: true
 
   /react-lowlight/3.0.0_react@18.2.0:
     resolution: {integrity: sha512-s0+T81PsCbUZYd/0XrplGc6kQEUdiwLKI0G6umJP1ViqRoZRCvSuHvXOy20Usd2ywDKWLuVETQgBDPeNQhPNZg==}
@@ -2483,39 +2426,6 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /react-redux/8.0.2_v7vsrdtui4d36prbwvdnlb7tpq:
-    resolution: {integrity: sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA==}
-    peerDependencies:
-      '@types/react': ^16.8 || ^17.0 || ^18.0
-      '@types/react-dom': ^16.8 || ^17.0 || ^18.0
-      react: ^16.8 || ^17.0 || ^18.0
-      react-dom: ^16.8 || ^17.0 || ^18.0
-      react-native: '>=0.59'
-      redux: ^4
-    peerDependenciesMeta:
-      '@types/react':
-        optional: true
-      '@types/react-dom':
-        optional: true
-      react-dom:
-        optional: true
-      react-native:
-        optional: true
-      redux:
-        optional: true
-    dependencies:
-      '@babel/runtime': 7.18.9
-      '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.0.15
-      '@types/react-dom': 18.0.6
-      '@types/use-sync-external-store': 0.0.3
-      hoist-non-react-statics: 3.3.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-is: 18.2.0
-      use-sync-external-store: 1.1.0_react@18.2.0
-    dev: false
-
   /react-ssr-prepass/1.5.0_react@18.2.0:
     resolution: {integrity: sha512-yFNHrlVEReVYKsLI5lF05tZoHveA5pGzjFbFJY/3pOqqjGOmMmqx83N4hIjN2n6E1AOa+eQEUxs3CgRnPmT0RQ==}
     peerDependencies:
@@ -2542,20 +2452,6 @@ packages:
     dependencies:
       picomatch: 2.3.1
 
-  /redux-thunk/2.4.1_redux@4.2.0:
-    resolution: {integrity: sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q==}
-    peerDependencies:
-      redux: ^4
-    dependencies:
-      redux: 4.2.0
-    dev: false
-
-  /redux/4.2.0:
-    resolution: {integrity: sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA==}
-    dependencies:
-      '@babel/runtime': 7.18.9
-    dev: false
-
   /regenerator-runtime/0.13.9:
     resolution: {integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==}
 
@@ -2575,10 +2471,6 @@ packages:
 
   /remove-accents/0.4.2:
     resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
-    dev: false
-
-  /reselect/4.1.6:
-    resolution: {integrity: sha512-ZovIuXqto7elwnxyXbBtCPo9YFEr3uJqj2rRbcOOog1bmu2Ag85M4hixSwFWyaBMKXNgvPaJ9OSu9SkBPIeJHQ==}
     dev: false
 
   /resolve-from/4.0.0:

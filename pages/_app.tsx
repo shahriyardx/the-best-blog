@@ -11,11 +11,6 @@ import { NextComponentType } from "next";
 import RequireAuth from "components/auth/requireAuth";
 import { Toaster } from "react-hot-toast";
 import RequireAdmin from "components/auth/requireAdmin";
-import { wrapper } from "src/redux/store";
-import { useDispatch } from "react-redux";
-import { trpc } from "@utils/trpc";
-import { setCategories } from "src/redux/category.slice";
-import { useEffect } from "react";
 import NextProgress from "next-progress";
 
 type CustomAppProps = AppProps & {
@@ -29,15 +24,6 @@ const TheBest = ({
   Component,
   pageProps: { session, ...pageProps },
 }: CustomAppProps) => {
-  const dispatch = useDispatch();
-  const { data: categories, isLoading } = trpc.useQuery(["category.all"], {
-    refetchOnWindowFocus: false,
-  });
-
-  useEffect(() => {
-    dispatch(setCategories(categories));
-  }, [categories, dispatch]);
-
   return (
     <SessionProvider session={session}>
       <SidebarProvider>
@@ -96,4 +82,4 @@ export default withTRPC<AppRouter>({
     };
   },
   ssr: false,
-})(wrapper.withRedux(TheBest));
+})(TheBest);

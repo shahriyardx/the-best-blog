@@ -1,12 +1,11 @@
+import React, { useState } from "react";
+import Script from "next/script";
+import { trpc } from "@utils/trpc";
+import { signIn, signOut, useSession } from "next-auth/react";
 import SidebarLink from "components/single/SidebarLink/SidebarLink";
 import Header from "components/sections/Header/Header";
 import Sidebar from "components/sections/Sidebar/Sidebar";
-import { signIn, signOut, useSession } from "next-auth/react";
-import React, { useState } from "react";
 import CategoriesSkeleaton from "components/single/Skeleaton/CategoriesSkeleaton";
-import { useSelector } from "react-redux";
-import { RootState } from "src/redux/store";
-import Script from "next/script";
 
 type Props = {
   children: React.ReactNode | React.ReactNode[];
@@ -15,9 +14,7 @@ type Props = {
 const Page = ({ children }: Props) => {
   const { data: session, status } = useSession();
   const [allcat, setAllCat] = useState<boolean>(false);
-  const { value: categories, isLoading } = useSelector(
-    (state: RootState) => state.categories
-  );
+  const { data: categories, isLoading } = trpc.useQuery(["category.all"]);
 
   return (
     <>
@@ -95,7 +92,7 @@ const Page = ({ children }: Props) => {
         </Sidebar>
         <div className="pb-10 min-h-[90vh]">{children}</div>
       </div>
-      
+
       <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-RQWQCR0TTX"
