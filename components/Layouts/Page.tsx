@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import CategoriesSkeleaton from "components/single/Skeleaton/CategoriesSkeleaton";
 import { useSelector } from "react-redux";
 import { RootState } from "src/redux/store";
+import Script from "next/script";
 
 type Props = {
   children: React.ReactNode | React.ReactNode[];
@@ -94,6 +95,22 @@ const Page = ({ children }: Props) => {
         </Sidebar>
         <div className="pb-10 min-h-[90vh]">{children}</div>
       </div>
+      
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-RQWQCR0TTX"
+        strategy="afterInteractive"
+      />
+
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-RQWQCR0TTX');
+        `}
+      </Script>
     </>
   );
 };
