@@ -14,7 +14,9 @@ type Props = {
 const Page = ({ children }: Props) => {
   const { data: session, status } = useSession();
   const [allcat, setAllCat] = useState<boolean>(false);
-  const { data: categories, isLoading } = trpc.useQuery(["category.all"]);
+  const { data: categories, isLoading } = trpc.useQuery(["category.all"], {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>
