@@ -6,7 +6,7 @@ type Props = {
   border?: boolean;
 };
 
-const FollowNotification = ({ notification }: Props) => {
+const FollowNotification = ({ notification, border }: Props) => {
   const fakeData = {
     user: {
       username: "test",
@@ -14,7 +14,11 @@ const FollowNotification = ({ notification }: Props) => {
   };
 
   return (
-    <div className="bg-zinc-700 hover:bg-zinc-600 p-3 rounded-md flex items-center gap-3 cursor-pointer">
+    <div
+      className={`bg-zinc-700 hover:bg-zinc-600 p-3 rounded-md flex items-center gap-3 cursor-pointer ${
+        border && "border-2 border-zinc-500"
+      }`}
+    >
       <div className="p-2 h-full aspect-square bg-zinc-500 text-white text-sm rounded-md">
         <BiUserPlus />
       </div>

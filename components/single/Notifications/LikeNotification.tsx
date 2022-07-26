@@ -7,10 +7,12 @@ type Props = {
   border?: boolean;
 };
 
-const LikeNotification = ({ notification }: Props) => {
+const LikeNotification = ({ notification, border }: Props) => {
   return (
     <div
-      className={`bg-zinc-700 hover:bg-zinc-600 p-3 rounded-md flex items-center gap-3 cursor-pointer`}
+      className={`bg-zinc-700 hover:bg-zinc-600 p-3 rounded-md flex items-center gap-3 cursor-pointer ${
+        border && "border-2 border-zinc-500"
+      }`}
     >
       <div className="p-2 h-full aspect-square bg-zinc-500 text-white text-sm rounded-md">
         <BiLike />
