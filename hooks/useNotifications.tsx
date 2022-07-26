@@ -1,15 +1,8 @@
 import { trpc } from "@utils/trpc";
 
 const useNotifications = () => {
-  const { data: notifications, refetch } = trpc.useQuery(
+  const { data: notifications , refetch } = trpc.useQuery(
     ["user.myNotifications"],
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-
-  const { data: allnotifications, refetch: refetchAll } = trpc.useQuery(
-    ["user.myNotificationsAll"],
     {
       refetchOnWindowFocus: false,
     }
@@ -18,11 +11,10 @@ const useNotifications = () => {
   const { mutate: markRead } = trpc.useMutation(["notification.markRead"], {
     onSuccess: () => {
       refetch();
-      refetchAll();
     },
   });
 
-  return { notifications, allnotifications, refetch, refetchAll, markRead };
+  return { notifications, refetch, markRead };
 };
 
 export default useNotifications;

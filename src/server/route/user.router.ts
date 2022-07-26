@@ -64,28 +64,6 @@ export const userRouter = createRouter()
       const notifications = await ctx.prisma.notification.findMany({
         where: {
           to_id: ctx.session?.profile.id,
-          status: "UNREAD",
-        },
-        include: {
-          from: {
-            select: {
-              username: true,
-            },
-          },
-        },
-        orderBy: {
-          created_at: "desc",
-        },
-      });
-
-      return notifications;
-    },
-  })
-  .query("myNotificationsAll", {
-    async resolve({ ctx }) {
-      const notifications = await ctx.prisma.notification.findMany({
-        where: {
-          to_id: ctx.session?.profile.id,
         },
         include: {
           from: {

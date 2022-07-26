@@ -8,7 +8,7 @@ import Notification from "components/single/Notifications/Notifications";
 
 const Posts: NextPage & { requireAuth: boolean } = () => {
   const { data: session } = useSession();
-  const { allnotifications: notifications, markRead } = useNotifications();
+  const { notifications, markRead } = useNotifications();
 
   const markAllRead = () => {
     markRead({ to_id: session?.profile.id as string });
