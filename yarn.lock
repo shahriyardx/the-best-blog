@@ -274,14 +274,14 @@
     lodash.isplainobject "^4.0.6"
     lodash.merge "^4.6.2"
 
-"@trpc/client@^9.26.0":
+"@trpc/client@^9.26.2":
   version "9.26.2"
   resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.26.2.tgz#82f57bfe96388a8028b10ebb9aad4eb58ec90b71"
   integrity sha512-R7eaxEtcK1C6PwxlGZCmMEiGGfn1BUU/hnulTpHVw/Mkd/3EqQqvP3Gs7pAYnJAZ44rjNF3Hepw5q2nP2Ctnhg==
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/next@^9.26.0":
+"@trpc/next@^9.26.2":
   version "9.26.2"
   resolved "https://registry.yarnpkg.com/@trpc/next/-/next-9.26.2.tgz#4ae95513b81971070c321b932bb4f3407b5d1e86"
   integrity sha512-CTSQ2G8m/GONbEnf7asDlmoiBCY/WPihuVnev4BWRu6cDnEe2CtVxo34biWknpiGacEykTzH9dEWBDmZAGReJA==
@@ -289,14 +289,14 @@
     "@babel/runtime" "^7.9.0"
     react-ssr-prepass "^1.5.0"
 
-"@trpc/react@^9.26.0":
+"@trpc/react@^9.26.2":
   version "9.26.2"
   resolved "https://registry.yarnpkg.com/@trpc/react/-/react-9.26.2.tgz#fbea785e4cc206646c215cc1d371ccf21eeda79f"
   integrity sha512-YCwn+Cd1/Yl6qB+/ZSF9A+32prBU4Z7un5Ms/q79mC090deCdfOL0IGNrv/7kX5EtsuOSo0RR/NUTo9f+xx1NA==
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/server@^9.26.0":
+"@trpc/server@^9.26.2":
   version "9.26.2"
   resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.26.2.tgz#2386d0d0c76b9d6cbdcef3006ea3221729617c21"
   integrity sha512-J1kP072cVYC5H2qFhiLQ/gV57s0of++9QLLKf9n8mVfx300tecKQW2eu/oFvRCDPRTTQ1prHz9zm15IzLwoRrw==
@@ -2227,7 +2227,7 @@ react-lowlight@^3.0.0:
   dependencies:
     lowlight "^2.4.1"
 
-react-query@^3.39.2:
+react-query@3:
   version "3.39.2"
   resolved "https://registry.yarnpkg.com/react-query/-/react-query-3.39.2.tgz#9224140f0296f01e9664b78ed6e4f69a0cc9216f"
   integrity sha512-F6hYDKyNgDQfQOuR1Rsp3VRzJnWHx6aRnnIZHMNGGgbL3SBgpZTDg8MQwmxOgpCAoqZJA+JSNCydF1xGJqKOCA==
@@ -2695,7 +2695,7 @@ yaml@^1.10.2:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
-zod@^3.17.3:
+zod@^3.17.10:
   version "3.17.10"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.17.10.tgz#8716a05e6869df6faaa878a44ffe3c79e615defb"
   integrity sha512-IHXnQYQuOOOL/XgHhgl8YjNxBHi3xX0mVcHmqsvJgcxKkEczPshoWdxqyFwsARpf41E0v9U95WUROqsHHxt0UQ==

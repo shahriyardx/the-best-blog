@@ -12,6 +12,7 @@ import RequireAuth from "components/auth/requireAuth";
 import { Toaster } from "react-hot-toast";
 import RequireAdmin from "components/auth/requireAdmin";
 import NextProgress from "next-progress";
+import { wrapper } from "src/redux";
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & {
@@ -82,4 +83,4 @@ export default withTRPC<AppRouter>({
     };
   },
   ssr: false,
-})(TheBest);
+})(wrapper.withRedux(TheBest));
