@@ -13,6 +13,9 @@ import { Toaster } from "react-hot-toast";
 import RequireAdmin from "components/auth/requireAdmin";
 import NextProgress from "next-progress";
 import { wrapper } from "src/redux";
+import { trpc } from "@utils/trpc";
+import { useDispatch } from "react-redux";
+import { setCategories } from "src/redux/slice/category.slice";
 
 type CustomAppProps = AppProps & {
   Component: NextComponentType & {
@@ -25,6 +28,15 @@ const TheBest = ({
   Component,
   pageProps: { session, ...pageProps },
 }: CustomAppProps) => {
+  const dispatch = useDispatch()
+  
+  trpc.useQuery(["category.all"], {
+    refetchOnWindowFocus: false,
+    onSuccess: (data) => {
+      dispatch(setCategories(data))
+    }
+  });
+
   return (
     <SessionProvider session={session}>
       <SidebarProvider>

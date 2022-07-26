@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper'
+import categorySlice from './slice/category.slice'
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    categories: categorySlice
+  },
 })
 
 
