@@ -7,12 +7,15 @@ type Props = {
   border?: boolean;
 };
 
-const Notification = ({ notification }: Props) => {
-  return notification.type === "LIKE" ? (
-    <LikeNotification notification={notification} />
-  ) : notification.type === "COMMENT" ? (
-    <CommentNotification notification={notification} />
-  ): null;
+const Notification = ({ notification, border }: Props) => {
+  const Component =
+    notification.type === "LIKE"
+      ? LikeNotification
+      : notification.type === "COMMENT"
+      ? CommentNotification
+      : LikeNotification;
+
+  return <Component border={border} notification={notification} />;
 };
 
 export default Notification;
