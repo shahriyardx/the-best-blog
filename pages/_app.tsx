@@ -62,7 +62,7 @@ export default withTRPC<AppRouter>({
   config({ ctx }) {
     const url =
       process.env.NODE_ENV === "production"
-        ? `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/trpc`
+        ? `${process.env.NEXT_PUBLIC_URL}/api/trpc`
         : `http://localhost:3000/api/trpc`;
 
     const links = [
