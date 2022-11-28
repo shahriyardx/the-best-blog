@@ -7,6 +7,7 @@ import Lowlight from "react-lowlight"; //@ts-ignore
 import python from "highlight.js/lib/languages/python"; //@ts-ignore
 import markdown from "highlight.js/lib/languages/markdown"; //@ts-ignore
 import javascript from "highlight.js/lib/languages/javascript"; //@ts-ignore
+import bash from "highlight.js/lib/languages/bash"; //@ts-ignore
 
 import "highlight.js/styles/atom-one-dark.css";
 import { Post, Comment, Like, Category, User } from "@prisma/client";
@@ -15,6 +16,7 @@ import { ISODateString } from "next-auth";
 Lowlight.registerLanguage("js", javascript);
 Lowlight.registerLanguage("py", python);
 Lowlight.registerLanguage("md", markdown);
+Lowlight.registerLanguage("sh", bash);
 
 interface Props {
   post: Post & {
